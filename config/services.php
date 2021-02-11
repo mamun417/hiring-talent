@@ -35,4 +35,9 @@ return [
         'client_secret' => 'ibuj7_AAr30E-HD40LaOkHKu',
         'redirect' => config('app.url').'/login/google/callback'
     ],
+    'facebook' => [
+        'client_id' => '460834535280595',
+        'client_secret' => '5966328bc46daaeffa3ae9b024a706e5',
+        'redirect' => config('app.url').'/login/facebook/callback'
+    ],
 ];
