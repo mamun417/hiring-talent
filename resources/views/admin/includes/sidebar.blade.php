@@ -4,8 +4,8 @@
         <ul class="nav metismenu" id="side-menu">
             <li>
                 <a class="d-flex p-2" href="{{ route('home') }}" target="_blank">
-                    <h2 class="text-white mt-1 ml-4 full-width site_title_hover">
-                        <strong class="ml-4">
+                    <h2 class="text-white mt-1 full-width site_title_hover">
+                        <strong>
                             {{ config('app.name')  }}
                         </strong>
                     </h2>
