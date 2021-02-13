@@ -52,6 +52,7 @@
                             <hr class="hr-text" data-content="OR">
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col">
                             <form class="white-form" id="login-form" action="{{ route('login') }}">
