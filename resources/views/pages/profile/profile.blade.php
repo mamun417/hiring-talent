@@ -107,25 +107,25 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="old_password">Your Current Password</label>
-                                    <input type="password" placeholder="Your Current Password" class="form-control"
-                                        name="old_password" value="{{ old('old_password') }}" required>
-                                    @error('old_password')
+                                    <label for="current_password">Your Current Password</label>
+                                    <input type="password" placeholder="Enter your current password" id="current_password" class="form-control"
+                                        name="current_password" required>
+                                    @error('current_password')
                                     <small class="text-danger">{{ @$message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="new_password">New Password</label>
-                                    <input type="password" placeholder="New Password" class="form-control"
-                                        name="new_password" value="{{ old('new_password') }}" required>
-                                    @error('new_password')
+                                    <input type="password" placeholder="Enter your new password" class="form-control"
+                                        name="password" required>
+                                    @error('password')
                                     <small class="text-danger">{{ @$message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="confirm_password">Confirm Password</label>
-                                    <input type="password" placeholder="Confirm Password" class="form-control"
-                                        name="confirm_password" value="{{ old('confirm_password') }}" required>
+                                    <input type="password" placeholder="Enter your confirm new password" class="form-control"
+                                        name="password_confirmation" required>
                                 </div>
                             </div>
                         </div>

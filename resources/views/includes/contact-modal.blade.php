@@ -39,8 +39,8 @@
                                             talent for your project, we want to hear from you!</i
                                         >
                                     </p>
-                                    <p><i>{{ @$globalContactInfo->phone_1 }}</i></p>
-                                    <p><i>{{ @$globalContactInfo->email }}</i></p>
+                                    <p class="mb-0"><i>{{ @$globalContactInfo->phone_1 }}</i></p>
+                                    <p class="mb-0"><i>{{ @$globalContactInfo->email }}</i></p>
                                     <a class="btn btn-primary text-white px-2 rounded-pill" href="{{ route('talents.create') }}">Add New Talent</a>
                                 </div>
                             </div>
@@ -134,8 +134,8 @@
                         <div class="col">
                             <p class="text-center">
                                 By registering, you agree to the
-                                <a class="text-primary">Terms of Use</a> and
-                                <a class="text-primary">Privacy Policy</a>
+                                <a href="javascript:void(0)" class="text-primary">Terms of Use</a> and
+                                <a href="javascript:void(0)" class="text-primary">Privacy Policy</a>
                             </p>
                         </div>
                     </div>

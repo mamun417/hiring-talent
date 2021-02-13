@@ -14,10 +14,10 @@ class FeaturedBrandsController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
-        $this->middleware('permission:featured_brand create|featured_brand edit|featured_brand delete', ['only' => ['index']]);
-        $this->middleware('permission:featured_brand create')->only(['create', 'store']);
-        $this->middleware('permission:featured_brand edit')->only(['edit', 'update']);
-        $this->middleware('permission:featured_brand delete')->only(['destroy']);
+        $this->middleware('permission:featured_collaborative_brand create|featured_collaborative_brand edit|featured_collaborative_brand delete', ['only' => ['index']]);
+        $this->middleware('permission:featured_collaborative_brand create')->only(['create', 'store']);
+        $this->middleware('permission:featured_collaborative_brand edit')->only(['edit', 'update']);
+        $this->middleware('permission:featured_collaborative_brand delete')->only(['destroy']);
     }
 
     public function index(Request $request)

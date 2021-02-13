@@ -104,7 +104,7 @@
 
                             @if (count(@$whatWeDos))
                             @else
-                                <div class="text-center">No Content found</div>
+                                <div class="text-center">No what we do found</div>
                             @endif
                         </div>
                     </div>

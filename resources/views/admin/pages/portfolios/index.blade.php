@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Portfolios')
+@section('title', 'Welcomes')
 
 @section('content')
 
@@ -11,7 +11,7 @@
                     <a href="{{ route('admin.dashboard') }}">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{ route('admin.portfolios.index') }}">Portfolios</a>
+                    <a href="{{ route('admin.portfolios.index') }}">Welcomes</a>
                 </li>
                 <li class="breadcrumb-item active">
                     <strong>Index</strong>
@@ -25,7 +25,7 @@
             <div class="col-lg-12">
                 <div class="ibox ">
                     <div class="ibox-title">
-                        <h5>All Portfolios</h5>
+                        <h5>All Welcomes</h5>
                         @can('welcome create')
                             @if(\App\Models\Portfolio::count() < 1)
                                 <a href="{{ route('admin.portfolios.create') }}"
@@ -99,7 +99,7 @@
 
                             @if (\App\Models\Portfolio::count() !== 0)
                             @else
-                                <div class="text-center">No portfolio found</div>
+                                <div class="text-center">No welcome found</div>
                             @endif
                         </div>
                     </div>

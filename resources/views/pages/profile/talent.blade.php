@@ -2,15 +2,17 @@
 @section('title', 'My Profile')
 @push('style')
     <style>
-        .card{
+        .card {
             border-top: 2px solid #0D8EF2;
         }
+
         .form-control:focus {
             border-color: #0D8EF2 !important;
             box-shadow: 0 0 0 0.2rem rgba(92, 184, 92, 0.25) !important;
         }
+
         .talent-table tr td, .talent-table tr th {
-            padding:20px;
+            padding: 20px;
             border-top: none !important;
         }
     </style>
@@ -26,7 +28,7 @@
                     <div class="card-body px-5">
                         <h5 class="h5 m-0">Talent Information
                             <small class="ml-4">
-                                <a href="{{ route('talents.create') }}" class="text-info edit_info" >Edit</a>
+                                <a href="{{ route('talents.create') }}" class="text-info edit_info">Edit</a>
                             </small>
                         </h5>
                         <hr class="my-4">
@@ -86,13 +88,17 @@
                                             <th>Image One</th>
                                             <td>
 
-                                                <img height="100" src="{{ isset($talent->images) ? $talent->images()->where('type', 'one')->first()->url : '' }}" alt="">
+                                                <img height="100"
+                                                     src="{{ isset($talent->images) ? $talent->images()->where('type', 'one')->first()->url : '' }}"
+                                                     alt="">
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Image Three</th>
                                             <td>
-                                                <img height="100" src="{{ isset($talent->images) ? $talent->images()->where('type', 'three')->first()->url : '' }}" alt="">
+                                                <img height="100"
+                                                     src="{{ isset($talent->images) ? $talent->images()->where('type', 'three')->first()->url : '' }}"
+                                                     alt="">
                                             </td>
                                         </tr>
                                     </table>
@@ -152,13 +158,17 @@
                                         <tr>
                                             <th>Image Two</th>
                                             <td>
-                                                <img height="100" src="{{ isset($talent->images) ? $talent->images()->where('type', 'two')->first()->url : '' }}" alt="">
+                                                <img height="100"
+                                                     src="{{ isset($talent->images) ? $talent->images()->where('type', 'two')->first()->url : '' }}"
+                                                     alt="">
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Image Four</th>
                                             <td>
-                                                <img height="100" src="{{ isset($talent->images) ? $talent->images()->where('type', 'four')->first()->url : '' }}" alt="">
+                                                <img height="100"
+                                                     src="{{ isset($talent->images) ? $talent->images()->where('type', 'four')->first()->url : '' }}"
+                                                     alt="">
                                             </td>
                                         </tr>
                                     </table>
@@ -166,7 +176,12 @@
                             </div>
                         </div>
                         <p class="text-center">
-                            <a target="_blank" href="{{ isset($talent->images) ? $talent->images()->where('type', 'resume')->first()->url : '' }}">View Your Resume</a>
+                            @php
+                                $resume_url = isset($talent->images) ? $talent->images()->where('type', 'resume')->first()->url : ''
+                            @endphp
+                            @if($resume_url)
+                                <a target="_blank" href="{{ $resume_url }}">View Your Resume</a>
+                            @endif
                         </p>
                     </div>
                 </div>
@@ -182,13 +197,14 @@
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     $('#image').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]); // convert to base64 string
             }
         }
-        $("#imgInp").change(function() {
+
+        $("#imgInp").change(function () {
             readURL(this);
         });
 

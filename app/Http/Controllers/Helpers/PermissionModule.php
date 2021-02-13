@@ -34,7 +34,7 @@ class PermissionModule
                 'permissions' => WhatWeDo::PERMISSION,
             ],
             [
-                'name' => 'featured_brand',
+                'name' => 'featured_collaborative_brand',
                 'permissions' => FeaturedBrand::PERMISSION,
             ],
             [
