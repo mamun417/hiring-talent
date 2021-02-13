@@ -92,8 +92,7 @@
                                     <th class="text-left">Subject</th>
                                     <th class="text-left">Message Body</th>
                                     <th>Reply Count</th>
-                                    @canany(['message show', 'message reply', 'message delete'
-                                                   ,'message reply delete'])
+                                    @canany(['message show', 'message delete', 'message reply', 'message reply show', 'message reply delete'])
                                         <th width="25%">Action</th>
                                     @endcanany
                                 </tr>
@@ -106,36 +105,40 @@
                                         <td class="text-left">{{ @$message->email }}</td>
                                         <td class="text-left">{{ ucfirst(Str::limit(@$message->subject, 50)) }}</td>
                                         <td class="text-left">{{ ucfirst(Str::limit(@$message->message, 50)) }}</td>
-                                        <td><span class="btn btn-primary">{{ @$message->replies()->count() }}</span></td>
+                                        <td>
+                                            <span class="badge badge-primary">{{ @$message->replies()->count() }}</span>
+                                        </td>
                                         @include("admin.pages.messages.reply-modal")
 
-                                        @canany(['message show', 'message reply', 'message delete'])
+                                        @canany(['message show', 'message delete', 'message reply', 'message reply show', 'message reply delete'])
                                             <td>
-                                                @can(['message reply'])
-                                                    @if(@$message->replies->count() > 0)
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Replied</button>
-                                                    @else
-                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Reply</button>
-                                                    @endif
-                                                @endcan
-                                                @can(['message show'])
+                                                @canany(['message reply'])
+                                                    <button type="button" class="btn btn-sm btn-primary"
+                                                            data-toggle="modal" data-target="#exampleModal"
+                                                            data-whatever="@fat"
+                                                            title="Replay"
+                                                    >
+                                                        <i class="fa fa-reply"></i>
+                                                    </button>
+                                                @endcanany
+                                                @canany(['message reply show', 'message reply delete'])
+                                                    <a href="{{ route('admin.message.replies', @$message->id)  }}"
+                                                       title="Show Replay Details"
+                                                       class="btn btn-primary btn-sm cus_btn">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                @endcanany
+                                                @canany(['message show'])
                                                     <a href="{{ route('admin.messages.show', @$message->id)  }}"
-                                                       title="Show"
+                                                       title="Show Message Details"
                                                        class="btn btn-info btn-sm cus_btn">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
-                                                @endcan
-                                                @can(['message show'])
-                                                    <a href="{{ route('admin.message.replies', @$message->id)  }}"
-                                                       title="Show"
-                                                       class="btn btn-success btn-sm cus_btn">
-                                                        Replies
-                                                    </a>
-                                                @endcan
-                                                @can('message delete')
+                                                @endcanany
+                                                @canany(['message delete'])
                                                     <button onclick="deleteRow({{ @$message->id }})"
                                                             href="JavaScript:void(0)"
-                                                            title="Delete" class="btn btn-danger btn-sm cus_btn">
+                                                            title="Delete the message" class="btn btn-danger btn-sm cus_btn">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
 
@@ -145,7 +148,7 @@
                                                         @method('DELETE')
                                                         @csrf()
                                                     </form>
-                                                @endcan
+                                                @endcanany
                                             </td>
                                         @endcanany
                                     </tr>

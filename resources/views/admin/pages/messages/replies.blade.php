@@ -37,12 +37,12 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td class="text-left">{{ ucfirst(Str::limit(@$message->name, 50)) }}</td>
-                                        <td class="text-left">{{ @$message->email }}</td>
-                                        <td class="text-left">{{ ucfirst(Str::limit(@$message->subject, 50)) }}</td>
-                                        <td class="text-left">{{ ucfirst(Str::limit(@$message->message, 50)) }}</td>
-                                    </tr>
+                                <tr>
+                                    <td class="text-left">{{ ucfirst(Str::limit(@$message->name, 50)) }}</td>
+                                    <td class="text-left">{{ @$message->email }}</td>
+                                    <td class="text-left">{{ @$message->subject}}</td>
+                                    <td class="text-left">{{ @$message->message}}</td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -56,7 +56,7 @@
                                     <th class="text-left">Subject</th>
                                     <th class="text-left">Reply Message Body</th>
                                     <th class="text-left">Time</th>
-                                    @canany(['reply delete'])
+                                    @canany(['message reply delete'])
                                         <th width="10%">Action</th>
                                     @endcanany
                                 </tr>
@@ -67,24 +67,26 @@
                                     <tr>
                                         <td class="text-left">{{ ucfirst(Str::limit(@$reply->createdUser->name, 50)) }}</td>
                                         <td class="text-left">{{ ucfirst(@$reply->reply_subject) }}</td>
-                                        <td class="text-left">{{ ucfirst(Str::limit(@$reply->reply_message, 120)) }}</td>
+                                        <td class="text-left">{{ @$reply->reply_message}}</td>
                                         <td class="text-left">{{ @$reply->created_at->diffForHumans() }}</td>
-                                        <td>
-                                            @can('message delete')
-                                                <button onclick="deleteRow({{ @$reply->id }})"
-                                                        href="JavaScript:void(0)"
-                                                        title="Delete" class="btn btn-danger btn-sm cus_btn">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
+                                        @canany(['message reply delete'])
+                                            <td>
+                                                @can('message reply delete')
+                                                    <button onclick="deleteRow({{ @$reply->id }})"
+                                                            href="JavaScript:void(0)"
+                                                            title="Delete" class="btn btn-danger btn-sm cus_btn">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
 
-                                                <form id="row-delete-form{{ @$reply->id }}" method="POST"
-                                                      class="d-none"
-                                                      action="{{ route('admin.replies.destroy', @$reply->id) }}">
-                                                    @method('DELETE')
-                                                    @csrf()
-                                                </form>
-                                            @endcan
-                                        </td>
+                                                    <form id="row-delete-form{{ @$reply->id }}" method="POST"
+                                                          class="d-none"
+                                                          action="{{ route('admin.replies.destroy', @$reply->id) }}">
+                                                        @method('DELETE')
+                                                        @csrf()
+                                                    </form>
+                                                @endcan
+                                            </td>
+                                        @endcanany
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -38,7 +38,7 @@ class RoleManageController extends Controller
 
     public function create()
     {
-        $permissions = Permission::latest()->get()->sortBy('module_name')->groupBy('module_name');
+        $permissions = Permission::latest()->get()->sortBy('module_name')->groupBy('module_name')->sortDesc();
         return view('admin.pages.authorizations.roles.create', compact('permissions'));
     }
 
@@ -75,7 +75,7 @@ class RoleManageController extends Controller
         if ($role->name == 'admin') { // can not delete admin role
             abort(403);
         }
-        $permissions = Permission::latest()->get()->sortBy('module_name')->groupBy('module_name');
+        $permissions = Permission::latest()->get()->sortBy('module_name')->groupBy('module_name')->sortDesc();
         return view('admin.pages.authorizations.roles.edit', compact('role', 'permissions'));
     }
 

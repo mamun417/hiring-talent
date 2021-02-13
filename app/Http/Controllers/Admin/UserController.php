@@ -99,15 +99,18 @@ class UserController extends Controller
 
     public function update(UserRequest $request, Admin $user)
     {
+
         DB::beginTransaction();
         try {
             if($request->password){
                 $update_password = Hash::make($request->password);
+            }else{
+                $update_password = $user->password;
             }
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $update_password ? $update_password : $user->password,
+                'password' => $update_password,
             ]);
 
             $user->syncRoles($request->type);

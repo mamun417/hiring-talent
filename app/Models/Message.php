@@ -20,7 +20,11 @@ class Message extends Model
     }
 
     const PERMISSION = [
-        0 => 'show',
+        'show',
+        'delete',
+        'reply',
+        'reply delete',
+        'reply show',
     ];
 
 }
