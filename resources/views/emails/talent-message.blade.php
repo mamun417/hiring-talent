@@ -352,7 +352,11 @@
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
                             <td class="logo" style="text-align: center;">
-                                <h1><a href="#">{{ config('app.name') }}</a></h1>
+                                <div style="text-align: center">
+                                    <a href="{{ route('home') }}">
+                                        <img width="40%" src="{{ @$globalSettingInfo->image->url }}" alt="">
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     </table>
