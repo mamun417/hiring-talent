@@ -83,13 +83,13 @@ class AdminController extends Controller
     public function changePassword(PasswordRequest $request)
     {
         $hasPassword = Auth::user()->password;
-        $check_password = Hash::check($request->old_password, $hasPassword);
+        $check_password = Hash::check($request->current_password, $hasPassword);
         if ($check_password){
-            $new_password = Hash::make($request->new_password);
+            $new_password = Hash::make($request->password);
             Admin::where('id', Auth::id())->update(['password' => $new_password]);
             return redirect()->back()->with('success', 'Password changed successfully');
         }else{
-            return redirect()->back()->with('warning', 'Old password dose not match with your current password');
+            return redirect()->back()->with('warning', 'Your password dose not match with current password');
         }
     }
 

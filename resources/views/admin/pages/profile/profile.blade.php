@@ -106,10 +106,10 @@
                                 @csrf
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        <label for="old_password">Old Password</label>
-                                        <input type="password" id="old_password" name="old_password" class="form-control">
+                                        <label for="current_password">Current Password</label>
+                                        <input type="password" id="current_password" name="current_password" class="form-control">
 
-                                        @error('old_password')
+                                        @error('current_password')
                                         <span class="help-block m-b-none text-danger">
                                             {{ $message }}
                                         </span>
@@ -117,10 +117,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="new_password">New Password</label>
-                                        <input type="password" id="new_password" name="new_password" class="form-control">
+                                        <label for="password">New Password</label>
+                                        <input type="password" id="password" name="password" class="form-control">
 
-                                        @error('new_password')
+                                        @error('password')
                                         <span class="help-block m-b-none text-danger">
                                             {{ $message }}
                                         </span>
@@ -128,10 +128,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="confirm_password">Confirm Password</label>
-                                        <input type="password" id="confirm_password" name="confirm_password" class="form-control">
+                                        <label for="password_confirmation">Confirm Password</label>
+                                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
 
-                                        @error('confirm_password')
+                                        @error('password_confirmation')
                                         <span class="help-block m-b-none text-danger">
                                             {{ $message }}
                                         </span>
