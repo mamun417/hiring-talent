@@ -17,15 +17,13 @@ class DatabaseSeeder extends Seeder
             AdminsSeeder::class,
             RoleSeeder::class,
             PermissionSeeder::class,
-            SettingSeeder::class,
-            SlidersSeeder::class,
-            UserTableSeeder::class,
-            TalentSeeder::class,
-            ContactSeeder::class,
-            MessageSeeder::class,
-            ReplySeeder::class,
-            SocialSeeder::class,
-            SliderBgSeeder::class,
+//            SettingSeeder::class,
+//            SlidersSeeder::class,
+//            UserTableSeeder::class,
+//            TalentSeeder::class,
+//            ContactSeeder::class,
+//            SocialSeeder::class,
+//            SliderBgSeeder::class,
         ]);
     }
 }

@@ -57,7 +57,7 @@
     <div class="col-md-12">
         <div class="form-group">
             <label for="password" class="control-label">Password</label>
-            <input required id="password" type="password"
+            <input id="password" type="password"
                    name="password" class="form-control">
 
             @error('password')

@@ -67,9 +67,9 @@
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse sidebar_background_color">
-                    <li class="{{ getActiveClassByController('PermissionManageController') }}">
-                        <a href="{{ route('admin.permissions.index') }}">Manage Permission</a>
-                    </li>
+{{--                    <li class="{{ getActiveClassByController('PermissionManageController') }}">--}}
+{{--                        <a href="{{ route('admin.permissions.index') }}">Manage Permission</a>--}}
+{{--                    </li>--}}
 
                     <li class="{{ getActiveClassByController('RoleManageController') }}">
                         <a href="{{ route('admin.roles.index') }}">Manage Role</a>
@@ -162,7 +162,7 @@
                 </li>
             @endcanany
 
-            @canany(['message show'])
+            @canany(['message show', 'message delete', 'message reply', 'message reply show', 'message reply delete'])
                 <li class="{{ getActiveClassByController('MessageController') }} {{ getActiveClassByController('ReplyController') }}">
                     <a href="{{ route('admin.messages.index') }}">
                         <i class="fa fa-envelope-o"></i>

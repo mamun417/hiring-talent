@@ -6,7 +6,7 @@
         <div class="ibox-content shadow">
             <a target="_blank" href="{{ url('/') }}">
                 <div style="text-align: center">
-                    <img alt="image" src="{{ $globalSettingInfo->image->url }}" width="166" />
+                    <img alt="image" src="{{ @$globalSettingInfo->image->url }}" width="166" />
                 </div>
             </a>
 
