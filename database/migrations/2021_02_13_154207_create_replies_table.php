@@ -15,7 +15,7 @@ class CreateRepliesTable extends Migration
     {
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('message_id')->constrained('messages')->onDelete('cascade');
+            $table->foreignId('message_id')->constrained('messages')->cascadeOnDelete();
             $table->string('reply_subject');
             $table->string('reply_email');
             $table->longText('reply_message');

@@ -92,8 +92,9 @@
                                     <th class="text-left">Subject</th>
                                     <th class="text-left">Message Body</th>
                                     <th>Reply Count</th>
-                                    @canany(['message show', 'message reply'])
-                                        <th width="20%">Action</th>
+                                    @canany(['message show', 'message reply', 'message delete'
+                                                   ,'message reply delete'])
+                                        <th width="25%">Action</th>
                                     @endcanany
                                 </tr>
                                 </thead>
@@ -108,7 +109,7 @@
                                         <td><span class="btn btn-primary">{{ @$message->replies()->count() }}</span></td>
                                         @include("admin.pages.messages.reply-modal")
 
-                                        @canany(['message show'])
+                                        @canany(['message show', 'message reply', 'message delete'])
                                             <td>
                                                 @can(['message reply'])
                                                     @if(@$message->replies->count() > 0)
@@ -117,11 +118,13 @@
                                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Reply</button>
                                                     @endif
                                                 @endcan
-                                                <a href="{{ route('admin.messages.show', @$message->id)  }}"
-                                                   title="Show"
-                                                   class="btn btn-info btn-sm cus_btn">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
+                                                @can(['message show'])
+                                                    <a href="{{ route('admin.messages.show', @$message->id)  }}"
+                                                       title="Show"
+                                                       class="btn btn-info btn-sm cus_btn">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                @endcan
                                                 @can(['message show'])
                                                     <a href="{{ route('admin.message.replies', @$message->id)  }}"
                                                        title="Show"
