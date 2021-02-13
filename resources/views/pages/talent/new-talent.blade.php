@@ -438,7 +438,7 @@
                                     type="file"
                                     class="form-control-file shadow p-2"
                                     name="talent_resume"
-                                />
+                                    accept=".doc,.docx,application/msword,application/pdf">
                                 @error('talent_resume')
                                 <span class="help-block m-b-none text-danger">
                                         {{ $message }}
