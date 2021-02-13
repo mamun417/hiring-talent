@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             TalentSeeder::class,
             ContactSeeder::class,
             MessageSeeder::class,
+            ReplySeeder::class,
             SocialSeeder::class,
             SliderBgSeeder::class,
         ]);

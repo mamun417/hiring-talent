@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\MissionAndValueController;
 use App\Http\Controllers\Admin\PermissionManageController;
 use App\Http\Controllers\Admin\PortfolioController;
+use App\Http\Controllers\Admin\ReplyController;
 use App\Http\Controllers\Admin\RoleManageController;
 use App\Http\Controllers\Admin\SettingController;
 
@@ -99,6 +100,11 @@ Route::group(['middleware' => ['auth:admin'], 'as' => 'admin.', 'prefix' => 'adm
 
     /******************************* Start => Message sections *********************************/
     Route::resource('messages', MessageController::class)->only(['index', 'show', 'destroy']);
+    /******************************* End => Message sections *********************************/
+
+    /******************************* Start => Message sections *********************************/
+    Route::resource('replies', ReplyController::class);
+    Route::get("message-replies/{message}", [ReplyController::class, 'messageReplies'])->name('message.replies');
     /******************************* End => Message sections *********************************/
 
     /******************************* Start => featured-brand sections *********************************/

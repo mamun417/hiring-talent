@@ -163,7 +163,7 @@
             @endcanany
 
             @canany(['message show'])
-                <li class="{{ getActiveClassByController('MessageController') }}">
+                <li class="{{ getActiveClassByController('MessageController') }} {{ getActiveClassByController('ReplyController') }}">
                     <a href="{{ route('admin.messages.index') }}">
                         <i class="fa fa-envelope-o"></i>
                         <span class="nav-label">Messages</span>

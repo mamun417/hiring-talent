@@ -2,13 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Message;
 use Illuminate\Database\Seeder;
-use Faker\Factory;
 use Spatie\Permission\Models\Permission;
 
-
-class MessageSeeder extends Seeder
+class ReplySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,10 +14,11 @@ class MessageSeeder extends Seeder
      */
     public function run()
     {
-        Message::factory()->count(20)->create();
+        //Reply::factory()->count(60)->create();
 
         $permissions = [
-            'message delete',
+            'reply',
+            'reply delete',
         ];
 
         foreach ($permissions as $permission) {

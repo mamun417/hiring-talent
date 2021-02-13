@@ -41,4 +41,12 @@ class MessageController extends Controller
     public function show(Message $message){
         return view('admin.pages.messages.details', compact('message'));
     }
+
+    public function destroy(Message $message)
+    {
+        {
+            $message->delete();
+            return redirect()->back()->with('success', 'Message Deleted Successfully');
+        }
+    }
 }
