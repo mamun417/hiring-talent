@@ -16,7 +16,7 @@
 
                 <div class="form-group">
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                           name="email"  required autocomplete="email" autofocus
+                           name="email" value="admin@test.com" required autocomplete="email" autofocus
                            placeholder="Email">
                     @error('email')
                     <span class="help-block m-b-none text-danger">{{ $message }}</span>
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input id="password" type="password"
+                    <input id="password" type="password" value="secret"
                            class="form-control @error('password') is-invalid @enderror" name="password" required
                            autocomplete="current-password" placeholder="Password">
                     @error('password')

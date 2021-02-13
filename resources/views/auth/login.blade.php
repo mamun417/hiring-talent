@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-md-6">
                             <a
-                                href="{{ route('login.social', 'facebook') }}"
+                                href="#"
                                 class="fb-btn btn btn-block shadow rounded-pill"
                             ><img
                                     src="{{ asset('frontend/img/facebook.svg') }}"

@@ -41,8 +41,8 @@
                                     <th class="text-left">Address</th>
                                     <th class="text-left">Phone Number 1</th>
                                     <th class="text-left">Phone Number 2</th>
-                                    <th class="text-left">Telephone</th>
                                     <th class="text-left">Email</th>
+                                    <th class="text-left">Telephone</th>
                                     {{--<th class="text-left">Fax</th>--}}
                                     @can('contact edit')
                                         <th class="text-center" width="8%">Actions</th>

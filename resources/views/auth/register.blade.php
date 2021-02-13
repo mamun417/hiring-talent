@@ -20,7 +20,7 @@
                         <div class="col-md-6">
                             <div class="mb-contact-modal">
                                 <a
-                                    href="{{ route('login.social', 'google') }}"
+                                    href="#"
                                     class="border-d9 google-btn btn btn-default btn-block shadow rounded-pill"
                                 ><img
                                         src="{{ asset('frontend/img/google.svg') }}"
@@ -33,9 +33,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <a
-                                href="{{ route('login.social', 'facebook') }}"
-                                class="fb-btn btn btn-block shadow rounded-pill"
+                            <a href="#" class="fb-btn btn btn-block shadow rounded-pill"
                             ><img
                                     src="{{ asset('frontend/img/facebook.svg') }}"
                                     width="20"
