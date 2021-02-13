@@ -115,8 +115,9 @@
                                                 @can('talent send message')
                                                     <a onclick="sendTalentMessageModal(event, '{{ @$talent->email }}')"
                                                        href="javascript:void(0)" title="Send Message"
-                                                       class="btn btn-info btn-sm cus_btn">
-                                                        Send Message
+                                                       class="btn btn-info btn-sm cus_btn"
+                                                    >
+                                                       <i class="fa fa-reply-all"></i>
                                                     </a>
                                                 @endcan
                                                 @can('talent show')

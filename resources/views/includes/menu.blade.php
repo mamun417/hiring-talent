@@ -30,7 +30,7 @@
             <li class="{{ $active_class ? 'active' : '' }}">
                 <a href="{{ route('user.profile') }}">Profile</a>
             </li>
-            <li class="{{ $active_class ? 'active' : '' }}">
+            <li>
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                     Logout</a>
@@ -93,7 +93,7 @@
                         <a href="{{ route('user.profile') }}">Profile
                         </a>
                     </li>
-                    <li class="{{ $active_class ? 'active' : '' }}">
+                    <li>
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                             Logout</a>

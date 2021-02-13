@@ -519,9 +519,7 @@
                                     name="represent_agency"
                                     class="form-control shadow talent-form-last-field"
                                     placeholder="If represented by another Agency or Manager, state Agency name, division represented and contact info*"
-                                >
-                                   {{ isset($talent) && @$talent->represent_agency ?  @$talent->represent_agency : old('represent_agency') }}
-                                </textarea>
+                                >{{ isset($talent) && @$talent->represent_agency ?  @$talent->represent_agency : old('represent_agency') }}</textarea>
                                 @error('represent_agency')
                                 <span class="help-block m-b-none text-danger">
                                         {{ $message }}

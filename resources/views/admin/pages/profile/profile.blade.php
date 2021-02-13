@@ -20,7 +20,7 @@
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row m-t-lg">
             <div class="col-md-4 mb-lg-0 jumbotron">
-                <div class="profile-image">.
+                <div class="profile-image">
                     <img src="{{ @$admin->image()->first()->url }}" class="rounded-circle circle-border m-b-md" alt="profile">
                 </div>
 

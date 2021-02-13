@@ -99,7 +99,7 @@
 </div>
 <div class="welcome-area">
     <div class="container">
-        <h2>FEATURED COLABORATIVE BRANDERS</h2>
+        <h2>FEATURED COLLABORATIVE BRANDERS</h2>
     </div>
 </div>
 <div class="container">

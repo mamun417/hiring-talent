@@ -108,22 +108,21 @@
                                         <td>
                                             <span class="badge badge-primary">{{ @$message->replies()->count() }}</span>
                                         </td>
-                                        @include("admin.pages.messages.reply-modal")
-
+                                        @include("admin.pages.messages.reply-modal", ['id' => $message->id])
                                         @canany(['message show', 'message delete', 'message reply', 'message reply show', 'message reply delete'])
                                             <td>
                                                 @canany(['message reply'])
                                                     <button type="button" class="btn btn-sm btn-primary"
-                                                            data-toggle="modal" data-target="#exampleModal"
+                                                            data-toggle="modal" data-target="#exampleModal-{{$message->id}}"
                                                             data-whatever="@fat"
-                                                            title="Replay"
+                                                            title="Reply"
                                                     >
                                                         <i class="fa fa-reply"></i>
                                                     </button>
                                                 @endcanany
                                                 @canany(['message reply show', 'message reply delete'])
                                                     <a href="{{ route('admin.message.replies', @$message->id)  }}"
-                                                       title="Show Replay Details"
+                                                       title="Show Reply Details"
                                                        class="btn btn-primary btn-sm cus_btn">
                                                         <i class="fa fa-eye"></i>
                                                     </a>

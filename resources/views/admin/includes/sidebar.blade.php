@@ -91,10 +91,10 @@
             @endrole
 
             @canany(['background_image create', 'background_image edit', 'background_image delete'])
-                <li class="{{ getActiveClassByRoute('admin.slider-bg*') }}">
+                <li class="{{ getActiveClassByController('SliderBgController') }}">
                     <a href="{{ route('admin.slider-bg.index') }}">
                         <i class="fa fa-photo"></i>
-                        <span class="nav-label">Background Image</span>
+                        <span class="nav-label">Background Images</span>
                     </a>
                 </li>
             @endcanany
@@ -123,11 +123,11 @@
                 </li>
             @endcanany
 
-            @canany(['featured_brand create', 'featured_brand edit', 'featured_brand delete'])
+            @canany(['featured_collaborative_brand create', 'featured_collaborative_brand edit', 'featured_collaborative_brand delete'])
                 <li class="{{ getActiveClassByController('FeaturedBrandsController') }}">
                     <a href="{{ route('admin.featured-brands.index') }}">
                         <i class="fa fa-braille"></i>
-                        <span class="nav-label">FEATURED BRANDERS</span>
+                        <span class="nav-label">Featured Collaborative Branders</span>
                     </a>
                 </li>
             @endcanany
