@@ -123,8 +123,12 @@
                 <div class="slide {{ @$key === 0 ? 'active' : ''}}">
                     <img src="{{ @$slider->image->url }}" alt=""/>
                     <div class="info">
+                        @if(@$slider->title)
                         <h2>{{ @$slider->title }}</h2>
-                        <p>{{ @$slider->text }}</p>
+                        @endif
+                        @if(@$slider->text)
+                        <p>{!! @$slider->text !!}</p>
+                        @endif
                         {{--                    <button>find out more</button>--}}
                     </div>
                 </div>
