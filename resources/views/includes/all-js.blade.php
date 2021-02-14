@@ -70,6 +70,9 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
+    toastr.options = {
+        "positionClass": "toast-top-center",
+    }
     @foreach(['success', 'warning', 'error', 'info'] as $item)
         @if(session($item))
         toastr['{{ $item }}']('{{ session($item) }}');

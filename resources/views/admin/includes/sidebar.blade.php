@@ -136,9 +136,13 @@
 
             @canany(['featured_collaborative_brand create', 'featured_collaborative_brand edit', 'featured_collaborative_brand delete'])
                 <li class="{{ getActiveClassByController('FeaturedBrandsController') }}">
-                    <a href="{{ route('admin.featured-brands.index') }}">
-                        <i class="fa fa-braille"></i>
-                        <span class="nav-label">Featured Collaborative Branders</span>
+                    <a href="{{ route('admin.featured-brands.index') }}" class="d-flex">
+                        <div>
+                            <i class="fa fa-braille"></i>
+                        </div>
+                        <div>
+                            <span class="nav-label">Featured Collaborative Branders</span>
+                        </div>
                     </a>
                 </li>
             @endcanany
