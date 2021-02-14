@@ -46,7 +46,7 @@ class UserProfileController extends Controller
             if ($request->file('image')) {
                 $image = $request->file('image');
                 FileHandler::delete(@$user->image->base_path);
-                $image_name = FileHandler::upload($image, 'users', ['width' => '96', 'height' => '96']);
+                $image_name = FileHandler::upload($image, 'user_images', ['width' => User::IMAGE_WIDTH, 'height' => User::IMAGE_HEIGHT]);
 
                 $image_data = [
                     'url' => Storage::url($image_name),
@@ -54,9 +54,9 @@ class UserProfileController extends Controller
                     'type' => 'user_pic',
                 ];
 
-                if ($user->image){
+                if ($user->image) {
                     $user->image()->update($image_data);
-                }else{
+                } else {
                     $user->image()->create($image_data);
                 }
             }

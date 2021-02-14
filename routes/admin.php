@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
@@ -80,11 +81,17 @@ Route::group(['middleware' => ['auth:admin'], 'as' => 'admin.', 'prefix' => 'adm
     Route::resource('settings', SettingController::class);
     /******************************* End => setting sections *********************************/
 
+
     /******************************* Start => Admin Profile sections *********************************/
-    Route::get('/profile', [AdminController::class, 'index'])->name('profile');
-    Route::PATCH('/profile/{admin}/update', [AdminController::class, 'update'])->name('profile.update');
-    Route::PATCH('/password/change', [AdminController::class, 'changePassword'])->name('password.change');
+    Route::get('/profile', [AdminProfileController::class, 'profile'])->name('profile');
+    Route::PATCH('/profile/{admin}/update', [AdminProfileController::class, 'profileUpdate'])->name('profile.update');
+    Route::PATCH('/password/change', [AdminProfileController::class, 'changePassword'])->name('password.change');
     /******************************* End => Admin Profile sections *********************************/
+
+    /******************************* Start => admins sections *********************************/
+    Route::resource('admins', AdminController::class);
+    /******************************* End => admins sections *********************************/
+
 
     /******************************* Start => Contact sections *********************************/
     Route::resource('contacts', ContactController::class);

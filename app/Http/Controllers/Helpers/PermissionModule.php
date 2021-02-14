@@ -12,18 +12,23 @@ use App\Models\Slider;
 use App\Models\Social;
 use App\Models\Talent;
 use App\Models\TalentDescription;
+use App\Models\User;
 use App\Models\WhatWeDo;
+use Illuminate\Support\Facades\DB;
 
 class PermissionModule
 {
 
     public static function modules()
     {
-
         $module_and_permissions = [
             [
                 'name' => 'slider',
                 'permissions' => Slider::PERMISSION, // it is array
+            ],
+            [
+                'name' => 'user',
+                'permissions' => User::PERMISSION, // it is array
             ],
             [
                 'name' => 'welcome', // portfolio

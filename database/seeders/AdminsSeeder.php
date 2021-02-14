@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Admin;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AdminsSeeder extends Seeder
 {
@@ -14,6 +15,11 @@ class AdminsSeeder extends Seeder
      */
     public function run()
     {
+
+//        DB::statement("SET foreign_key_checks=0");
+//        DB::table('admins')->truncate(); // first delete old data
+//        DB::statement("SET foreign_key_checks=1");
+
         $admin = Admin::create([
             'name' => 'admin',
             'email' => 'admin@test.com',

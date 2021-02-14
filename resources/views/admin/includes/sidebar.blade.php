@@ -57,7 +57,9 @@
                 </a>
             </li>
 
-            @php(@$active_class = getActiveClassByController('PermissionManageController') || getActiveClassByController('RoleManageController') || getActiveClassByController('UserController') )
+            @php(@$active_class = getActiveClassByController('PermissionManageController') ||
+                 getActiveClassByController('RoleManageController') ||
+                 getActiveClassByController('AdminController') )
             @role('admin')
 
 
@@ -67,28 +69,37 @@
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse sidebar_background_color">
-{{--                    <li class="{{ getActiveClassByController('PermissionManageController') }}">--}}
-{{--                        <a href="{{ route('admin.permissions.index') }}">Manage Permission</a>--}}
-{{--                    </li>--}}
+                    {{--                    <li class="{{ getActiveClassByController('PermissionManageController') }}">--}}
+                    {{--                        <a href="{{ route('admin.permissions.index') }}">Manage Permission</a>--}}
+                    {{--                    </li>--}}
 
                     <li class="{{ getActiveClassByController('RoleManageController') }}">
                         <a href="{{ route('admin.roles.index') }}">Manage Role</a>
                     </li>
 
-                    <li class="{{ getActiveClassByRoute('admin.users.create') }}">
-                        <a href="{{ route('admin.users.create') }}">
+                    <li class="{{ getActiveClassByRoute('admin.admins.create') }}">
+                        <a href="{{ route('admin.admins.create') }}">
                             <span class="nav-label">Admin Create</span>
                         </a>
                     </li>
 
-                    <li class="{{ getActiveClassByRoute('admin.users.index') . getActiveClassByRoute('admin.users.edit')}}">
-                        <a href="{{ route('admin.users.index') }}">
+                    <li class="{{ getActiveClassByRoute('admin.admins.index') . getActiveClassByRoute('admin.admins.edit')}}">
+                        <a href="{{ route('admin.admins.index') }}">
                             <span class="nav-label">Admin List</span>
                         </a>
                     </li>
                 </ul>
             </li>
             @endrole
+
+            @canany(['user edit', 'user delete'])
+                <li class="{{ getActiveClassByController('UserController') }}">
+                    <a href="{{ route('admin.users.index') }}">
+                        <i class="fa fa-user"></i>
+                        <span class="nav-label">Users</span>
+                    </a>
+                </li>
+            @endcanany
 
             @canany(['background_image create', 'background_image edit', 'background_image delete'])
                 <li class="{{ getActiveClassByController('SliderBgController') }}">

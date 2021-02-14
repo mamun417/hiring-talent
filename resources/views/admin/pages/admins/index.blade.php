@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Admins')
 
 @section('content')
 
@@ -11,7 +11,7 @@
                     <a href="{{ route('admin.dashboard') }}">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">
-                    <strong>Users</strong>
+                    <strong>Admins</strong>
                 </li>
             </ol>
         </div>
@@ -22,15 +22,15 @@
             <div class="col-lg-12">
                 <div class="ibox ">
                     <div class="ibox-title">
-                        <h5>Users</h5>
-                        {{--                        <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary pull-right">--}}
-                        {{--                            <i class="fa fa-plus"></i> <strong>Create</strong>--}}
-                        {{--                        </a>--}}
+                        <h5>Admins</h5>
+                        <a href="{{ route('admin.admins.create') }}" class="btn btn-sm btn-primary pull-right">
+                            <i class="fa fa-plus"></i> <strong>Create</strong>
+                        </a>
                     </div>
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-sm-12">
-                                <form action="{{ route('admin.users.index')}}" method="get"
+                                <form action="{{ route('admin.admins.index')}}" method="get"
                                       role="form">
                                     <div class="row">
                                         <div class="col-md-6 col-md-offset-6">
@@ -72,7 +72,7 @@
                                                 </div>
                                                 <div class="col-md-1 p-0 responsive_p_l_15">
                                                 <span>
-                                                    <a href="{{ route('admin.users.index') }}"
+                                                    <a href="{{ route('admin.admins.index') }}"
                                                        class="btn btn-default btn-sm custom_field_height">Reset
                                                     </a>
                                                 </span>
@@ -90,60 +90,51 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>Image</th>
                                     <th class="text-left">Name</th>
+                                    <th>Image</th>
                                     <th class="text-left">Email</th>
-                                    <th class="text-left">Phone</th>
-                                    <th class="text-left">Address</th>
-                                    <th class="text-left">Referral Code</th>
-                                    @canany(['user edit', 'user delete'])
-                                        <th>Action</th>
-                                    @endcanany
-
+                                    <th class="text-left">Roles</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
-                                @foreach($users as $user)
+
+                                @foreach($admins as $admin)
                                     <tbody>
                                     <tr>
+                                        <td class="text-left">{{ ucfirst(Str::limit(@$admin->name, 50)) }}</td>
                                         <td>
                                             <img width="100" height="50"
-                                                 src="{{ isset($user) ? @$user->image->url : '' }}" alt="Image">
+                                                 src="{{ isset($admin) ? @$admin->image->url : '' }}" alt="Image">
                                         </td>
-                                        <td class="text-left">{{ ucfirst(Str::limit(@$user->name, 50)) }}</td>
-                                        <td class="text-left">{{ @$user->email }}</td>
-                                        <td class="text-left">{{ @$user->phone }}</td>
-                                        <td class="text-left">{{ @$user->address }}</td>
-                                        <td class="text-left">{{ @$user->referral_code }}</td>
-                                        @canany(['user edit', 'user delete'])
-                                            <td>
-                                                @canany(['user edit'])
-                                                    <a href="{{ route('admin.users.edit', @$user->id) }}" title="Edit"
-                                                       class="btn btn-info btn-sm cus_btn">
-                                                        <i class="fa fa-pencil-square-o"></i>
-                                                    </a>
-                                                @endcanany
-                                                @canany(['user delete'])
-                                                    <button onclick="deleteRow({{ @$user->id }})"
-                                                            href="JavaScript:void(0)"
-                                                            title="Delete" class="btn btn-danger btn-sm cus_btn">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
+                                        <td class="text-left">{{ @$admin->email }}</td>
+                                        <td class="text-left">
+                                            @foreach(@$admin->roles as $role)
+                                                <span class="badge badge-primary">{{ $role->name }}</span>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.admins.edit', @$admin->id) }}" title="Edit"
+                                               class="btn btn-info btn-sm cus_btn">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                            </a>
 
-                                                    <form id="row-delete-form{{ @$user->id }}" method="POST"
-                                                          class="d-none"
-                                                          action="{{ route('admin.users.destroy', @$user->id) }}">
-                                                        @method('DELETE')
-                                                        @csrf()
-                                                    </form>
-                                                @endcanany
-                                            </td>
-                                        @endcanany
+                                            <button onclick="deleteRow({{ @$admin->id }})" href="JavaScript:void(0)"
+                                                    title="Delete" class="btn btn-danger btn-sm cus_btn">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+
+                                            <form id="row-delete-form{{ @$admin->id }}" method="POST" class="d-none"
+                                                  action="{{ route('admin.admins.destroy', @$admin->id) }}">
+                                                @method('DELETE')
+                                                @csrf()
+                                            </form>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 @endforeach
                             </table>
-                            @if(!$users->count() > 0)
-                                <div class="text-center">No User found</div>
+                            @if(!$admins->count() > 0)
+                                <div class="text-center">No admin found</div>
                             @endif
                         </div>
                     </div>

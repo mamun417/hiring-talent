@@ -15,6 +15,14 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    const IMAGE_WIDTH = 84;
+    const IMAGE_HEIGHT = 84;
+
+    const PERMISSION = [
+        'edit',
+        'delete',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
