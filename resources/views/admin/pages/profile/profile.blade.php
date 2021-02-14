@@ -40,20 +40,24 @@
             </div>
             <div class="col-md-8">
                 <div class="tabs-container">
+
+                    @php($active_change_password = old('current_password') ? true : false)
+
                     <ul class="nav nav-tabs" role="tablist">
                         <li>
-                            <a class="nav-link active show text-dark" data-toggle="tab" href="#profile-tab">
+                            <a class="nav-link text-dark {{ !$active_change_password ? 'active show' : '' }}" data-toggle="tab" href="#profile-tab">
                                 <h3>Change Info</h3>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link text-dark" data-toggle="tab" href="#password-tab">
+                            <a class="nav-link text-dark {{ $active_change_password ? 'active show' : '' }}" data-toggle="tab" href="#password-tab">
                                 <h3>Change Password</h3>
                             </a>
                         </li>
                     </ul>
+
                     <div class="tab-content">
-                        <div role="tabpanel" id="profile-tab" class="tab-pane active show">
+                        <div role="tabpanel" id="profile-tab" class="tab-pane {{ !$active_change_password ? 'active show' : '' }}">
                             <form action="{{ route('admin.profile.update', Auth::id()) }}" method="post" enctype="multipart/form-data">
                                 @method('patch')
                                 @csrf
@@ -100,14 +104,14 @@
                         </div>
 
 
-                        <div role="tabpanel" id="password-tab" class="tab-pane">
+                        <div role="tabpanel" id="password-tab" class="tab-pane {{ $active_change_password ? 'active show' : '' }}">
                             <form action="{{ route('admin.password.change') }}" method="post">
                                 @method('patch')
                                 @csrf
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label for="current_password">Current Password</label>
-                                        <input type="password" id="current_password" name="current_password" class="form-control">
+                                        <input type="password" id="current_password" required name="current_password" class="form-control">
 
                                         @error('current_password')
                                         <span class="help-block m-b-none text-danger">
@@ -118,7 +122,7 @@
 
                                     <div class="form-group">
                                         <label for="password">New Password</label>
-                                        <input type="password" id="password" name="password" class="form-control">
+                                        <input type="password" id="password" name="password" class="form-control" required>
 
                                         @error('password')
                                         <span class="help-block m-b-none text-danger">
@@ -129,7 +133,7 @@
 
                                     <div class="form-group">
                                         <label for="password_confirmation">Confirm Password</label>
-                                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
+                                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
 
                                         @error('password_confirmation')
                                         <span class="help-block m-b-none text-danger">

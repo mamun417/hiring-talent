@@ -4,7 +4,7 @@
     </div>
     <ul class="nav navbar-top-links navbar-right">
         <li>
-            <a class="dropdown-item" href="{{ route('admin.logout') }}"
+            <a class="dropdown-item invisible" href="{{ route('admin.logout') }}"
                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fa fa-sign-out"></i> Log out
             </a>
