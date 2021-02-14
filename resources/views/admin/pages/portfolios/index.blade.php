@@ -46,7 +46,7 @@
                                     <th class="text-left">Images</th>
                                     <th class="text-left">Description</th>
                                     @canany(['welcome edit', 'welcome delete'])
-                                        <th class="text-center">Actions</th>
+                                        <th width="100" class="text-center">Actions</th>
                                     @endcanany
                                 </tr>
                                 </thead>
@@ -56,23 +56,25 @@
                                     <tr>
                                         <td class="text-left">{{ ucfirst(Str::limit(@$portfolio->title, 50)) }}</td>
                                         <td class="text-left">{{ ucfirst(Str::limit(@$portfolio->sub_title, 50)) }}</td>
-                                        <td width="40%">
+                                        <td>
                                             @if(@$portfolio)
-                                                @forelse(@$portfolio->images as $image)
-                                                    <img width="20%" height="50" src="{{ @$image->url }}"
-                                                         alt="Image">
-                                                @empty
-
-                                                @endforelse
+                                                <div class="d-flex flex-column">
+                                                    @forelse(@$portfolio->images as $image)
+                                                        <img width="100%" height="50" src="{{ @$image->url }}"
+                                                             alt="Image">
+                                                        <br>
+                                                    @empty
+                                                    @endforelse
+                                                </div>
                                             @endif
                                         </td>
                                         <td class="text-left">{!! @$portfolio->description !!}</td>
                                         @canany(['welcome edit', 'welcome delete'])
-                                            <td>
+                                            <td width="100">
                                                 @can('welcome edit')
                                                     <a href="{{ route('admin.portfolios.edit', @$portfolio->id) }}"
                                                        title="Edit"
-                                                       class="btn btn-info btn-sm cus_btn">
+                                                       class="btn btn-info btn-sm cus_btn mb-sm-0 mb-2">
                                                         <i class="fa fa-pencil-square-o"></i>
                                                     </a>
                                                 @endcan

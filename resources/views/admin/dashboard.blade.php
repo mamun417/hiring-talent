@@ -6,7 +6,7 @@
     <div class="">
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-3">
-                <a href="#userList">
+                <a href="{{ route('admin.users.index') }}">
                     <div class="widget style1 navy-bg">
                     <div class="row">
                         <div class="col-4">

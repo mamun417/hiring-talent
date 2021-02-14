@@ -44,8 +44,7 @@
                                 <tr>
                                     <th class="text-left">Title</th>
                                     <th class="text-left">Subtitle</th>
-                                    <th class="text-left">Youtube Link1</th>
-                                    <th class="text-left">Youtube Link2</th>
+                                    <th class="text-left">Youtube Link</th>
                                     <th class="text-left">Description</th>
                                     @canany(['what_we_do edit', 'what_we_do delete'])
                                         <th class="text-center" width="10%">Actions</th>
@@ -62,10 +61,8 @@
                                         <td>
                                             {{ @$whatWeDo->sub_title }}
                                         </td>
-                                        <td>
+                                        <td width="50">
                                             <a target="_blank" href="{{ @$whatWeDo->youtube_link_1 }}">{{ @$whatWeDo->youtube_link_1 }}</a>
-                                        </td>
-                                        <td>
                                             <a target="_blank" href="{{ @$whatWeDo->youtube_link_2 }}">{{ @$whatWeDo->youtube_link_2 }}</a>
                                         </td>
                                         <td class="text-left">
