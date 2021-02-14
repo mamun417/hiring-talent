@@ -24,6 +24,6 @@
                 </div>
             </div>
         </div>
-        <p class="text-center my-0">{{ config('app.name') }} © {{ date('Y') }} All Rights are Reserved</p>
+        <p class="text-center my-0">{{ config('app.name') }} © {{ date('Y') }} All rights reserved.</p>
     </div>
 </div>
