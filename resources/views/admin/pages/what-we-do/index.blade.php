@@ -42,11 +42,11 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th class="text-left" width="10%">Title</th>
-                                    <th class="text-left" width="10%">Subtitle</th>
-                                    <th class="text-left" width="15%">Youtube Link1</th>
-                                    <th class="text-left" width="15%">Youtube Link2</th>
-                                    <th class="text-left" width="40%">Description</th>
+                                    <th class="text-left">Title</th>
+                                    <th class="text-left">Subtitle</th>
+                                    <th class="text-left">Youtube Link1</th>
+                                    <th class="text-left">Youtube Link2</th>
+                                    <th class="text-left">Description</th>
                                     @canany(['what_we_do edit', 'what_we_do delete'])
                                         <th class="text-center" width="10%">Actions</th>
                                     @endcanany
@@ -63,10 +63,10 @@
                                             {{ @$whatWeDo->sub_title }}
                                         </td>
                                         <td>
-                                            {{ @$whatWeDo->youtube_link_1 }}
+                                            <a target="_blank" href="{{ @$whatWeDo->youtube_link_1 }}">{{ @$whatWeDo->youtube_link_1 }}</a>
                                         </td>
                                         <td>
-                                            {{ @$whatWeDo->youtube_link_2 }}
+                                            <a target="_blank" href="{{ @$whatWeDo->youtube_link_2 }}">{{ @$whatWeDo->youtube_link_2 }}</a>
                                         </td>
                                         <td class="text-left">
                                             {!! @$whatWeDo->description !!}

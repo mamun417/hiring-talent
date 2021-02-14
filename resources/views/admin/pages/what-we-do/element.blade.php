@@ -16,7 +16,7 @@
 </div>
 <div class="col-md-12">
     <div class="form-group">
-        <label for="sub_title" class="control-label">Subtitle<span class="required-star"> *</span></label>
+        <label for="sub_title" class="control-label">Sub-Title<span class="required-star"> *</span></label>
         <input id="sub_title" type="text" value="{{ isset($whatWeDo) ? @$whatWeDo->sub_title : old('sub_title')}}"
                name="sub_title" class="form-control" autofocus>
         @error('sub_title')
