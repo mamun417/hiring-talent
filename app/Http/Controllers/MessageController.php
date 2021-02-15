@@ -30,13 +30,6 @@ class MessageController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     * @throws \Throwable
-     */
     public function store(MessageRequest $request)
     {
 
@@ -46,7 +39,7 @@ class MessageController extends Controller
             Message::create($email_details);
 
             DB::commit();
-            return redirect()->back()->with('success', 'Message Send Successfully');
+            return redirect()->back()->with('success', 'Message Successfully Send');
 
 
 

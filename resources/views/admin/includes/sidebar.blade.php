@@ -163,7 +163,7 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level collapse sidebar_background_color">
-                        @canany(['talent show', 'talent send message'])
+                        @canany(['talent show', 'talent delete', 'talent reply', 'talent reply show', 'talent reply delete'])
                             <li class="{{ getActiveClassByController('TalentController') }}">
                                 <a href="{{ route('admin.talents.index') }}">Talents</a>
                             </li>

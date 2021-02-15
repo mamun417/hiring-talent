@@ -65,7 +65,7 @@ class FeaturedBrandsController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.featured-brands.index')->with('success', 'Featured Brand Successfully Created');
+            return redirect()->route('admin.featured-brands.index')->with('success', 'Featured Collaborative Brand Successfully Created');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -112,7 +112,7 @@ class FeaturedBrandsController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('success', 'Featured Brand Successfully Update');
+            return redirect()->back()->with('success', 'Featured Collaborative Brand Successfully Updated');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -135,7 +135,7 @@ class FeaturedBrandsController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.featured-brands.index')->with('success', 'Featured Brand Successfully Deleted');
+            return redirect()->route('admin.featured-brands.index')->with('success', 'Featured Collaborative Brand Successfully Deleted');
 
         } catch (\Exception $exception) {
             report($exception);

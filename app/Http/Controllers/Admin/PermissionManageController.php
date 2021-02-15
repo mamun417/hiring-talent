@@ -90,7 +90,7 @@ class PermissionManageController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.permissions.index')->with('success', 'Permission Successfully Updated!');
+            return redirect()->route('admin.permissions.index')->with('success', 'Permission Successfully Updated');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -105,7 +105,7 @@ class PermissionManageController extends Controller
         abort(404);
         $permission->delete();
 
-        return redirect()->route('admin.permissions.index')->with('success', 'Permission Successfully Deleted!');
+        return redirect()->route('admin.permissions.index')->with('success', 'Permission Successfully Deleted');
     }
 
 

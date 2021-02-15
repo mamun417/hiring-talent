@@ -65,7 +65,7 @@ class SocialController extends Controller
             Social::create($onlyGo);
 
             DB::commit();
-            return redirect()->back()->with('success', 'Social Created Successfully');
+            return redirect()->back()->with('success', 'Social Successfully Created');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -99,7 +99,7 @@ class SocialController extends Controller
             $social->update($onlyGo);
 
             DB::commit();
-            return redirect()->back()->with('success', 'Social Update Successfully');
+            return redirect()->back()->with('success', 'Social Successfully Updated');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -113,7 +113,7 @@ class SocialController extends Controller
     {
         {
             $social->delete();
-            return redirect()->back()->with('success', 'Social Deleted Successfully');
+            return redirect()->back()->with('success', 'Social Successfully Deleted');
         }
     }
 

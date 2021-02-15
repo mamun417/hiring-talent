@@ -43,7 +43,7 @@ class AdminProfileController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->back()->with('success', 'Profile Update Successfully');
+            return redirect()->back()->with('success', 'Profile Successfully Updated');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -59,7 +59,7 @@ class AdminProfileController extends Controller
         if ($check_password) {
             $new_password = Hash::make($request->password);
             Admin::where('id', Auth::id())->update(['password' => $new_password]);
-            return redirect()->back()->with('success', 'Password changed successfully');
+            return redirect()->back()->with('success', 'Password successfully changed');
         } else {
             return redirect()->back()->with('warning', 'Your password dose not match with current password');
         }

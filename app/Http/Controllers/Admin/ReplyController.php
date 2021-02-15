@@ -66,7 +66,7 @@ class ReplyController extends Controller
     public function destroy(Reply $reply)
     {
         $reply->delete();
-        return redirect()->back()->with('success', 'Reply Deleted Successfully');
+        return redirect()->back()->with('success', 'Reply Successfully Deleted');
     }
 
 }

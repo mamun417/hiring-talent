@@ -56,7 +56,7 @@
                                     <th class="text-left">Subject</th>
                                     <th class="text-left">Reply Message Body</th>
                                     <th class="text-left">Time</th>
-                                    @canany(['message reply delete'])
+                                    @canany(['talent reply delete'])
                                         <th width="10%">Action</th>
                                     @endcanany
                                 </tr>
@@ -69,9 +69,9 @@
                                         <td class="text-left">{{ ucfirst(@$reply->subject) }}</td>
                                         <td class="text-left">{{ @$reply->message_body}}</td>
                                         <td class="text-left">{{ @$reply->created_at->diffForHumans() }}</td>
-                                        @canany(['message reply delete'])
+                                        @canany(['talent reply delete'])
                                             <td>
-                                                @can('message reply delete')
+                                                @can('talent reply delete')
                                                     <button onclick="deleteRow({{ @$reply->id }})"
                                                             href="JavaScript:void(0)"
                                                             title="Delete" class="btn btn-danger btn-sm cus_btn">

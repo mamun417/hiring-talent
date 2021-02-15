@@ -94,7 +94,7 @@ class UserController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('success', 'User successfully updated');
+            return redirect()->back()->with('success', 'User Successfully Updated');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -118,6 +118,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->back()->with('success', 'User successfully deleted');
+        return redirect()->back()->with('success', 'User Successfully Deleted');
     }
 }

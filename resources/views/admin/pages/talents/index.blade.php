@@ -95,7 +95,7 @@
                                     <th class="text-left">Subject</th>
                                     <th class="text-left">Referred By</th>
                                     <th>Reply Count</th>
-                                    @canany(['talent send message', 'talent show'])
+                                    @canany(['talent show', 'talent delete', 'talent reply', 'talent reply show', 'talent reply delete'])
                                         <th width="25%">Action</th>
                                     @endcanany
                                 </tr>
@@ -114,21 +114,23 @@
                                         <td>
                                             <span class="badge badge-primary">{{ @$talent->replies()->count() }}</span>
                                         </td>
-                                        @canany(['talent send message', 'talent show'])
+                                        @canany(['talent show', 'talent delete', 'talent reply', 'talent reply show', 'talent reply delete'])
                                             <td>
-                                                @can('talent send message')
+                                                @can('talent reply')
                                                     <a onclick="sendTalentMessageModal(event, '{{ @$talent->email.' '. @$talent->id }}')"
                                                        href="javascript:void(0)" title="Reply"
                                                        class="btn btn-sm btn-primary"
                                                     >
-                                                       <i class="fa fa-reply-all"></i>
+                                                        <i class="fa fa-reply-all"></i>
                                                     </a>
                                                 @endcan
+                                                @canany(['talent reply show', 'talent reply delete'])
                                                     <a href="{{ route('admin.talent.message.replies', @$talent->id)  }}"
                                                        title="Show Reply Details"
                                                        class="btn btn-primary btn-sm cus_btn">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
+                                                @endcanany
                                                 @can('talent show')
                                                     <a href="{{ route('admin.talents.show', @$talent->id) }}"
                                                        title="Show Talent Details"
@@ -136,10 +138,11 @@
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                 @endcan
-
+                                                @can('talent delete')
                                                     <button onclick="deleteRow({{ @$talent->id }})"
                                                             href="JavaScript:void(0)"
-                                                            title="Delete the message" class="btn btn-danger btn-sm cus_btn">
+                                                            title="Delete The Talent"
+                                                            class="btn btn-danger btn-sm cus_btn">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
 
@@ -149,6 +152,7 @@
                                                         @method('DELETE')
                                                         @csrf()
                                                     </form>
+                                                @endcan
                                             </td>
                                         @endcanany
                                     </tr>

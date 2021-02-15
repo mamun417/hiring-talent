@@ -16,10 +16,15 @@ class TalentController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
-        $this->middleware('permission:talent show|talent send message', ['only' => ['index']]);
+        $this->middleware('permission:talent show|talent delete|talent reply|talent reply show|talent reply delete', ['only' => ['index']]);
         $this->middleware('permission:talent show')->only(['show']);
-        $this->middleware('permission:talent send message')->only(['talentMessageSend']);
+        $this->middleware('permission:talent delete')->only(['destroy']);
+        $this->middleware('permission:talent reply')->only(['talentMessageSend']);
+        $this->middleware('permission:talent reply show|talent reply delete')->only(['messageReplies']);
+        $this->middleware('permission:talent reply delete')->only(['replyDestroy']);
     }
+
+
 
     public function messageReplies(Talent $talent)
     {

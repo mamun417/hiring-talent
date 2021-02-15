@@ -45,6 +45,6 @@ class MessageController extends Controller
     public function destroy(Message $message)
     {
         $message->delete();
-        return redirect()->back()->with('success', 'Message Deleted Successfully');
+        return redirect()->back()->with('success', 'Message successfully deleted');
     }
 }

@@ -71,7 +71,7 @@ class AdminController extends Controller
             $user->syncRoles($request->type);
 
             DB::commit();
-            return back()->with('success', 'Admin successfully created');
+            return back()->with('success', 'Admin Successfully Created');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -130,7 +130,7 @@ class AdminController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('success', 'Admin successfully updated');
+            return redirect()->back()->with('success', 'Admin Successfully Updated');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -144,6 +144,6 @@ class AdminController extends Controller
         FileHandler::delete($admin->image ? $admin->image->base_path : null);
         $admin->delete();
 
-        return redirect()->back()->with('success', 'Admin successfully deleted');
+        return redirect()->back()->with('success', 'Admin Successfully Deleted');
     }
 }

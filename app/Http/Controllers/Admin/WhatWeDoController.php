@@ -54,7 +54,7 @@ class WhatWeDoController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.what-we-do.index')->with('success', 'What We Do Created Successfully');
+            return redirect()->route('admin.what-we-do.index')->with('success', 'What We Do Successfully Created');
 
         } catch (\Exception $exception) {
             report($exception);

@@ -34,6 +34,6 @@ class HomeController extends Controller
     public function allFeaturedBrands(){
         $featuredBrands = FeaturedBrand::latest()->get();
         return view('pages.all-featured-brands.all-featured-brands', compact('featuredBrands'));
-        dd($featuredBrands);
+//        dd($featuredBrands);
     }
 }

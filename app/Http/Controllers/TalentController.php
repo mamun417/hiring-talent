@@ -148,7 +148,7 @@ class TalentController extends Controller
             }
 
             DB::commit();
-            return redirect()->back()->with('success', 'Talent successfully saved');
+            return redirect()->back()->with('success', 'Talent Successfully Saved');
 
         } catch (\Exception $exception) {
             report($exception);

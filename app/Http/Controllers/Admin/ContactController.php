@@ -44,7 +44,7 @@ class ContactController extends Controller
             Contact::create($onlyGo);
 
             DB::commit();
-            return redirect()->route('admin.contacts.index')->with('success', 'Contact Create Successfully');
+            return redirect()->route('admin.contacts.index')->with('success', 'Contact Successfully Created');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -72,7 +72,7 @@ class ContactController extends Controller
             $contact->update($onlyGo);
 
             DB::commit();
-            return redirect()->back()->with('success', 'Contact Update Successfully');
+            return redirect()->back()->with('success', 'Contact Successfully Updated');
 
         } catch (\Exception $exception) {
             report($exception);

@@ -56,7 +56,7 @@ class SettingController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('admin.settings.index')->with('success', 'Setting Create Successfully');
+            return redirect()->route('admin.settings.index')->with('success', 'Setting Successfully Created');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -102,7 +102,7 @@ class SettingController extends Controller
             $setting->update($onlyGo);
 
             DB::commit();
-            return redirect()->back()->with('success', 'Social Update Successfully');
+            return redirect()->back()->with('success', 'Setting Successfully Updated');
 
         } catch (\Exception $exception) {
             report($exception);

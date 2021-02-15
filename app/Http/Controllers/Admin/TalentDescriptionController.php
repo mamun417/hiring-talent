@@ -45,7 +45,7 @@ class TalentDescriptionController extends Controller
             TalentDescription::create($request->only(['description', 'title']));
 
             DB::commit();
-            return redirect()->route('admin.talent_descriptions.index')->with('success', 'Talent Description Create Successfully');
+            return redirect()->route('admin.talent_descriptions.index')->with('success', 'Talent Description Successfully Created');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -76,7 +76,7 @@ class TalentDescriptionController extends Controller
             $TalentDescription->update($request->only(['description', 'title']));
 
             DB::commit();
-            return redirect()->route('admin.talent_descriptions.index')->with('success', 'Talent Description Update Successfully');
+            return redirect()->route('admin.talent_descriptions.index')->with('success', 'Talent Description Successfully Updated');
 
         } catch (\Exception $exception) {
             report($exception);
