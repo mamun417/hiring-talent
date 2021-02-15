@@ -127,14 +127,14 @@
                                                 @canany(['talent reply show', 'talent reply delete'])
                                                     <a href="{{ route('admin.talent.message.replies', @$talent->id)  }}"
                                                        title="Show Reply Details"
-                                                       class="btn btn-primary btn-sm cus_btn">
+                                                       class="btn btn-success btn-sm cus_btn">
                                                         <i class="fa fa-comment"></i>
                                                     </a>
                                                 @endcanany
                                                 @can('talent show')
                                                     <a href="{{ route('admin.talents.show', @$talent->id) }}"
                                                        title="Show Talent Details"
-                                                       class="btn btn-info btn-sm cus_btn">
+                                                       class="btn btn-warning btn-sm cus_btn">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                 @endcan

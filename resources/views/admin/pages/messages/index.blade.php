@@ -123,14 +123,14 @@
                                                 @canany(['message reply show', 'message reply delete'])
                                                     <a href="{{ route('admin.message.replies', @$message->id)  }}"
                                                        title="Show Reply Details"
-                                                       class="btn btn-primary btn-sm cus_btn">
+                                                       class="btn btn-success btn-sm cus_btn">
                                                         <i class="fa fa-comment"></i>
                                                     </a>
                                                 @endcanany
                                                 @canany(['message show'])
                                                     <a href="{{ route('admin.messages.show', @$message->id)  }}"
                                                        title="Show Message Details"
-                                                       class="btn btn-info btn-sm cus_btn">
+                                                       class="btn btn-warning btn-sm cus_btn">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                 @endcanany
