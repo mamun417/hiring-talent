@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Helpers\FileHandler;
 use App\Mail\TalentMessage;
 use App\Models\Talent;
+use App\Models\TalentReply;
 use Illuminate\Http\Request;
 use Mail;
 
@@ -17,6 +19,12 @@ class TalentController extends Controller
         $this->middleware('permission:talent show|talent send message', ['only' => ['index']]);
         $this->middleware('permission:talent show')->only(['show']);
         $this->middleware('permission:talent send message')->only(['talentMessageSend']);
+    }
+
+    public function messageReplies(Talent $talent)
+    {
+        $replies = $talent->replies()->paginate(10);
+        return view("admin.pages.talents.replies", compact('replies', 'talent'));
     }
 
     public function index(Request $request)
@@ -55,17 +63,34 @@ class TalentController extends Controller
     {
 
         $request->validate([
-            'talent_email' => 'required',
+            'talent_id' => 'required',
+            'talent_email' => 'required|email',
             'subject' => 'required',
             'message_body' => 'required',
         ]);
 
-        $details = $request->only(['talent_email', 'subject', 'message_body']);
+        $details = $request->only(['talent_email', 'subject', 'message_body', 'talent_id']);
 
         Mail::to($details['talent_email'])->send(new TalentMessage($details));
 
+        TalentReply::create($details);
         return redirect()->back()->with('success', 'Message Successfully Send');
     }
 
+    public function destroy(Talent $talent)
+    {
+        if ($talent && $talent->images) {
+            foreach ($talent->images as $image) {
+                FileHandler::delete($image->base_path ? $image->base_path : null);
+            }
+        }
 
+        $talent->delete();
+        return redirect()->back()->with('success', 'Talent Deleted Successfully');
+    }
+
+    public function replyDestroy(TalentReply $talentReply){
+        $talentReply->delete();
+        return redirect()->back()->with('success', 'Reply Deleted Successfully');
+    }
 }

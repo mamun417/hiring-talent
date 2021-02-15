@@ -100,8 +100,11 @@ Route::group(['middleware' => ['auth:admin'], 'as' => 'admin.', 'prefix' => 'adm
     /******************************* Start => talents sections *********************************/
     Route::get('talents', [TalentController::class, 'index'])->name('talents.index');
     Route::get('talents/details/{talent}', [TalentController::class, 'show'])->name('talents.show');
+    Route::delete('talents/delete/{talent}', [TalentController::class, 'destroy'])->name('talents.destroy');
     Route::resource('talent_descriptions', TalentDescriptionController::class);
     Route::post('talent/send/message', [TalentController::class, 'talentMessageSend'])->name('send.message.to-talent');
+    Route::get("talent/message/replies/{talent}", [TalentController::class, 'messageReplies'])->name('talent.message.replies');
+    Route::delete('talent/reply/delete/{talentReply}', [TalentController::class, 'replyDestroy'])->name('talent.replies.destroy');
 
     /******************************* End => talents sections *********************************/
 
