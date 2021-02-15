@@ -156,7 +156,7 @@
             @endcanany
 
             @php(@$active_class = getActiveClassByController('TalentDescriptionController') || getActiveClassByController('TalentController'))
-            @canany(['talent show', 'talent send message', 'talent_description create', 'talent_description edit'])
+            @canany(['talent show', 'talent delete', 'talent reply', 'talent reply show', 'talent reply delete', 'talent_description create', 'talent_description edit'])
                 <li class="{{ @$active_class ? 'active' : '' }}">
                     <a href="javascript:void(0)"><i class="fa fa-users"></i>
                         <span class="nav-label">Manage Talents</span>
