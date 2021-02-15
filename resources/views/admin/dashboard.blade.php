@@ -14,7 +14,7 @@
                             </div>
                             <div class="col-8 text-right">
                                 <span> Total Admins </span>
-                                <h2 class="font-bold">{{ @$admins }}</h2>
+                                <h2 class="font-bold">{{ @$admins - 1 }}</h2>
                             </div>
                         </div>
                     </div>

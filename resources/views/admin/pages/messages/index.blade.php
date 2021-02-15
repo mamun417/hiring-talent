@@ -124,7 +124,7 @@
                                                     <a href="{{ route('admin.message.replies', @$message->id)  }}"
                                                        title="Show Reply Details"
                                                        class="btn btn-primary btn-sm cus_btn">
-                                                        <i class="fa fa-eye"></i>
+                                                        <i class="fa fa-comment"></i>
                                                     </a>
                                                 @endcanany
                                                 @canany(['message show'])

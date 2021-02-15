@@ -128,7 +128,7 @@
                                                     <a href="{{ route('admin.talent.message.replies', @$talent->id)  }}"
                                                        title="Show Reply Details"
                                                        class="btn btn-primary btn-sm cus_btn">
-                                                        <i class="fa fa-eye"></i>
+                                                        <i class="fa fa-comment"></i>
                                                     </a>
                                                 @endcanany
                                                 @can('talent show')
