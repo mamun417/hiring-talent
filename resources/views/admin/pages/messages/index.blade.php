@@ -90,8 +90,8 @@
                                     <th class="text-left">User Name</th>
                                     <th class="text-left">User Email</th>
                                     <th class="text-left">Subject</th>
-                                    <th class="text-left">Message Body</th>
-                                    <th>Reply Count</th>
+                                    <th class="text-left">Message</th>
+                                    <th>Replied Count</th>
                                     @canany(['message show', 'message delete', 'message reply', 'message reply show', 'message reply delete'])
                                         <th width="25%">Action</th>
                                     @endcanany

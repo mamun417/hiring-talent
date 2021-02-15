@@ -54,7 +54,7 @@
                                 <tr>
                                     <th class="text-left">Replied By</th>
                                     <th class="text-left">Subject</th>
-                                    <th class="text-left">Reply Message Body</th>
+                                    <th class="text-left">Replied Message</th>
                                     <th class="text-left">Time</th>
                                     @canany(['talent reply delete'])
                                         <th width="10%">Action</th>

@@ -6,18 +6,33 @@
     <div class="">
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-3">
-                <a href="{{ route('admin.users.index') }}">
+                <a href="{{ route('admin.admins.index') }}">
                     <div class="widget style1 navy-bg">
-                    <div class="row">
-                        <div class="col-4">
-                            <i class="fa fa-users fa-5x"></i>
-                        </div>
-                        <div class="col-8 text-right">
-                            <span> Total Users </span>
-                            <h2 class="font-bold">{{ @$users->count() }}</h2>
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="fa fa-users fa-5x"></i>
+                            </div>
+                            <div class="col-8 text-right">
+                                <span> Total Admins </span>
+                                <h2 class="font-bold">{{ @$admins }}</h2>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
+            </div>
+            <div class="col-lg-3">
+                <a href="{{ route('admin.users.index') }}">
+                    <div class="widget style1 bg-danger">
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="fa fa-users fa-5x"></i>
+                            </div>
+                            <div class="col-8 text-right">
+                                <span> Total Users </span>
+                                <h2 class="font-bold">{{ @$users }}</h2>
+                            </div>
+                        </div>
+                    </div>
                 </a>
             </div>
             <div class="col-lg-3">
@@ -29,11 +44,24 @@
                             </div>
                             <div class="col-8 text-right">
                                 <span> Total messages </span>
-                                <h2 class="font-bold">{{ @$messages->count() }}</h2>
+                                <h2 class="font-bold">{{ @$messages }}</h2>
                             </div>
                         </div>
                     </div>
                 </a>
+            </div>
+            <div class="col-lg-3">
+                <div class="widget style1 bg-secondary text-white">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa fa-reply-all fa-5x"></i>
+                        </div>
+                        <div class="col-8 text-right">
+                            <span> Total Message Replied</span>
+                            <h2 class="font-bold">{{ @$total_message_replied }}</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-3">
                 <a href="{{ route('admin.talents.index') }}">
@@ -44,22 +72,50 @@
                             </div>
                             <div class="col-8 text-right">
                                 <span> Total Talents </span>
-                                <h2 class="font-bold">{{ @$talents->count() }}</h2>
+                                <h2 class="font-bold">{{ @$talents }}</h2>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-lg-3">
+                <div class="widget style1 bg-success">
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa fa-mail-reply-all fa-5x"></i>
+                        </div>
+                        <div class="col-8 text-right">
+                            <span> Total Talent Replied </span>
+                            <h2 class="font-bold">{{ @$total_talent_replied }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
                 <a href="{{ route('admin.sliders.index') }}">
-                    <div class="widget style1 navy-bg">
+                    <div class="widget style1 bg-dark text-white">
                         <div class="row">
                             <div class="col-4">
                                 <i class="fa fa-image fa-5x"></i>
                             </div>
                             <div class="col-8 text-right">
                                 <span> Total Sliders </span>
-                                <h2 class="font-bold">{{ @$sliders->count() }}</h2>
+                                <h2 class="font-bold">{{ @$sliders }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3">
+                <a href="{{ route('admin.featured-brands.index') }}">
+                    <div class="widget style1 bg-danger">
+                        <div class="row">
+                            <div class="col-3">
+                                <i class="fa fa-braille fa-4x"></i>
+                            </div>
+                            <div class="col-9 text-right">
+                                <span> Featured Collaborative Brands </span>
+                                <h2 class="font-bold">{{ @$featured_brands }}</h2>
                             </div>
                         </div>
                     </div>

@@ -32,7 +32,7 @@
                                     <th class="text-left">User Name</th>
                                     <th class="text-left">User Email</th>
                                     <th class="text-left">Subject</th>
-                                    <th class="text-left">Message Body</th>
+                                    <th class="text-left">Message</th>
                                 </tr>
                                 </thead>
 
@@ -54,7 +54,7 @@
                                 <tr>
                                     <th class="text-left">Replied By</th>
                                     <th class="text-left">Subject</th>
-                                    <th class="text-left">Reply Message Body</th>
+                                    <th class="text-left">Replied Message</th>
                                     <th class="text-left">Time</th>
                                     @canany(['message reply delete'])
                                         <th width="10%">Action</th>

@@ -94,7 +94,7 @@
                                     <th class="text-left">Date Of Birth</th>
                                     <th class="text-left">Subject</th>
                                     <th class="text-left">Referred By</th>
-                                    <th>Reply Count</th>
+                                    <th>Replied Count</th>
                                     @canany(['talent show', 'talent delete', 'talent reply', 'talent reply show', 'talent reply delete'])
                                         <th width="25%">Action</th>
                                     @endcanany
