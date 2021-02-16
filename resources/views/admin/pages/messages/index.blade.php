@@ -84,9 +84,23 @@
                         </div>
 
                         <div class="table-responsive m-t-md">
+                            @canany(['message reply'])
+                                <div class="d-flex mb-2">
+                                    <button class="btn btn-sm btn-success mr-2 sendMailSelectedMessageBtn">Send mail to
+                                        selected messages
+                                    </button>
+                                    <button class="btn btn-sm btn-info sendMailAllMessagesBtn">Send mail to all messages
+                                    </button>
+                                </div>
+                            @endcanany
                             <table class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
+                                    @canany(['message reply'])
+                                        <th class="text-left" width="75">
+                                            <input type="checkbox" id="checkAll"> <label for="checkAll">All</label>
+                                        </th>
+                                    @endcanany
                                     <th class="text-left">User Name</th>
                                     <th class="text-left">User Email</th>
                                     <th class="text-left">Subject</th>
@@ -101,6 +115,11 @@
                                 <tbody>
                                 @foreach(@$messages as $message)
                                     <tr>
+                                        @canany(['message reply'])
+                                            <td class="text-left">
+                                                <input type="checkbox" value="{{ $message->id }}" class="checkedMe">
+                                            </td>
+                                        @endcanany
                                         <td class="text-left">{{ ucfirst(Str::limit(@$message->name, 50)) }}</td>
                                         <td class="text-left">{{ @$message->email }}</td>
                                         <td class="text-left">{{ ucfirst(Str::limit(@$message->subject, 50)) }}</td>
@@ -113,7 +132,8 @@
                                             <td>
                                                 @canany(['message reply'])
                                                     <button type="button" class="btn btn-sm btn-primary"
-                                                            data-toggle="modal" data-target="#exampleModal-{{$message->id}}"
+                                                            data-toggle="modal"
+                                                            data-target="#exampleModal-{{$message->id}}"
                                                             data-whatever="@fat"
                                                             title="Reply"
                                                     >
@@ -137,7 +157,8 @@
                                                 @canany(['message delete'])
                                                     <button onclick="deleteRow({{ @$message->id }})"
                                                             href="JavaScript:void(0)"
-                                                            title="Delete the message" class="btn btn-danger btn-sm cus_btn">
+                                                            title="Delete the message"
+                                                            class="btn btn-danger btn-sm cus_btn">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
 
@@ -166,5 +187,58 @@
             </div>
         </div>
     </div>
+
+    @include('admin.pages.messages.messageMailModal')
+
 @endsection
 
+@push('script')
+    <script>
+
+        $("#checkAll").change(function () {
+            $("input:checkbox").prop('checked', this.checked);
+        });
+
+        $(".checkedMe").click(function () {
+            if ($(this).is(":checked")) {
+                var isAllChecked = true; // initialize all is checked true
+
+                $(".checkedMe").each(function () {
+                    if (!this.checked)
+                        isAllChecked = false;
+                });
+
+                if (isAllChecked) {
+                    $("#checkAll").prop("checked", true);
+                }
+            } else {
+                $("#checkAll").prop("checked", false);
+            }
+        });
+
+
+        $(".sendMailAllMessagesBtn").on('click', (e) => {
+            e.preventDefault();
+            $("#sendMailAllMessagesModal").modal('show');
+        })
+
+
+        $(".sendMailSelectedMessageBtn").on('click', (e) => {
+            e.preventDefault();
+
+            let customers = [];
+            $(".checkedMe").each(function () {
+                if (this.checked) {
+                    customers.push($(this).val())
+                }
+            });
+
+            if (customers.length) {
+                $("#selectedMessagesField").val(customers)
+                $("#sendMailAllSelectedMessagesModal").modal('show');
+            } else {
+                toastr.warning('First select some messages.');
+            }
+        })
+    </script>
+@endpush

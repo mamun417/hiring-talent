@@ -8,7 +8,7 @@ use App\Mail\TalentMessage;
 use App\Models\Talent;
 use App\Models\TalentReply;
 use Illuminate\Http\Request;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class TalentController extends Controller
 {
@@ -23,7 +23,6 @@ class TalentController extends Controller
         $this->middleware('permission:talent reply show|talent reply delete')->only(['messageReplies']);
         $this->middleware('permission:talent reply delete')->only(['replyDestroy']);
     }
-
 
 
     public function messageReplies(Talent $talent)
@@ -66,7 +65,26 @@ class TalentController extends Controller
 
     public function talentMessageSend(Request $request)
     {
+        $request->validate([
+            'subject' => 'required',
+            'message_body' => 'required',
+        ]);
 
+        //Start => send mail to all talent section
+        if ($request->mail_to === 'all') {
+            $this->sendMailToAllTalents($request);
+            return redirect()->back()->with('success', 'Message Successfully Send');
+        }
+        //End => send mail to all talent section
+
+        //Start => send mail to selected talent section
+        if ($request->mail_to === 'selected_talents') {
+            $this->sendMailToSelectedTalents($request);
+            return redirect()->back()->with('success', 'Message Successfully Send');
+        }
+        //End => send mail to selected talent section
+
+        // single talent send mail
         $request->validate([
             'talent_id' => 'required',
             'talent_email' => 'required|email',
@@ -94,8 +112,43 @@ class TalentController extends Controller
         return redirect()->back()->with('success', 'Talent Deleted Successfully');
     }
 
-    public function replyDestroy(TalentReply $talentReply){
+    public function replyDestroy(TalentReply $talentReply)
+    {
         $talentReply->delete();
         return redirect()->back()->with('success', 'Reply Deleted Successfully');
     }
+
+
+    protected function sendMailToAllTalents(Request $request)
+    {
+        $all_talents = Talent::all();
+        foreach ($all_talents as $talent) {
+            $details = [
+                'talent_email' => $talent->email,
+                'subject' => $request->subject,
+                'message_body' => $request->message_body,
+                'talent_id' => $talent->id,
+            ];
+            Mail::to($details['talent_email'])->send(new TalentMessage($details));
+            TalentReply::create($details);
+        }
+    }
+
+    protected function sendMailToSelectedTalents(Request $request)
+    {
+        $talents_ids = explode(',', $request->talents[0]);
+        $all_talents = Talent::whereIn('id', $talents_ids)->get();
+        foreach ($all_talents as $talent) {
+            $details = [
+                'talent_email' => $talent->email,
+                'subject' => $request->subject,
+                'message_body' => $request->message_body,
+                'talent_id' => $talent->id,
+            ];
+            Mail::to($details['talent_email'])->send(new TalentMessage($details));
+            TalentReply::create($details);
+        }
+    }
+
+
 }
