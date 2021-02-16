@@ -46,7 +46,7 @@ class WhatWeDoController extends Controller
         try {
             WhatWeDo::create([
                 'title' => $request->title,
-                'subtitle' => $request->subtitle,
+                'sub_title' => $request->sub_title,
                 'youtube_link_1' => $request->youtube_link_1,
                 'youtube_link_2' => $request->youtube_link_2,
                 'description' => $request->description,
@@ -54,7 +54,7 @@ class WhatWeDoController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.what-we-do.index')->with('success', 'What We Do Created Successfully');
+            return redirect()->route('admin.what-we-do.index')->with('success', 'What We Do Successfully Created');
 
         } catch (\Exception $exception) {
             report($exception);

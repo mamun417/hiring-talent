@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\MissionAndValueController;
 use App\Http\Controllers\Admin\PermissionManageController;
 use App\Http\Controllers\Admin\PortfolioController;
+use App\Http\Controllers\Admin\ReplyController;
 use App\Http\Controllers\Admin\RoleManageController;
 use App\Http\Controllers\Admin\SettingController;
 
@@ -79,11 +81,17 @@ Route::group(['middleware' => ['auth:admin'], 'as' => 'admin.', 'prefix' => 'adm
     Route::resource('settings', SettingController::class);
     /******************************* End => setting sections *********************************/
 
+
     /******************************* Start => Admin Profile sections *********************************/
-    Route::get('/profile', [AdminController::class, 'index'])->name('profile');
-    Route::PATCH('/profile/{admin}/update', [AdminController::class, 'update'])->name('profile.update');
-    Route::PATCH('/password/change', [AdminController::class, 'changePassword'])->name('password.change');
+    Route::get('/profile', [AdminProfileController::class, 'profile'])->name('profile');
+    Route::PATCH('/profile/{admin}/update', [AdminProfileController::class, 'profileUpdate'])->name('profile.update');
+    Route::PATCH('/password/change', [AdminProfileController::class, 'changePassword'])->name('password.change');
     /******************************* End => Admin Profile sections *********************************/
+
+    /******************************* Start => admins sections *********************************/
+    Route::resource('admins', AdminController::class);
+    /******************************* End => admins sections *********************************/
+
 
     /******************************* Start => Contact sections *********************************/
     Route::resource('contacts', ContactController::class);
@@ -92,13 +100,21 @@ Route::group(['middleware' => ['auth:admin'], 'as' => 'admin.', 'prefix' => 'adm
     /******************************* Start => talents sections *********************************/
     Route::get('talents', [TalentController::class, 'index'])->name('talents.index');
     Route::get('talents/details/{talent}', [TalentController::class, 'show'])->name('talents.show');
+    Route::delete('talents/delete/{talent}', [TalentController::class, 'destroy'])->name('talents.destroy');
     Route::resource('talent_descriptions', TalentDescriptionController::class);
     Route::post('talent/send/message', [TalentController::class, 'talentMessageSend'])->name('send.message.to-talent');
+    Route::get("talent/message/replies/{talent}", [TalentController::class, 'messageReplies'])->name('talent.message.replies');
+    Route::delete('talent/reply/delete/{talentReply}', [TalentController::class, 'replyDestroy'])->name('talent.replies.destroy');
 
     /******************************* End => talents sections *********************************/
 
     /******************************* Start => Message sections *********************************/
     Route::resource('messages', MessageController::class)->only(['index', 'show', 'destroy']);
+    /******************************* End => Message sections *********************************/
+
+    /******************************* Start => Message sections *********************************/
+    Route::resource('replies', ReplyController::class);
+    Route::get("message-replies/{message}", [ReplyController::class, 'messageReplies'])->name('message.replies');
     /******************************* End => Message sections *********************************/
 
     /******************************* Start => featured-brand sections *********************************/

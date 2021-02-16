@@ -30,7 +30,7 @@
             <li class="{{ $active_class ? 'active' : '' }}">
                 <a href="{{ route('user.profile') }}">Profile</a>
             </li>
-            <li class="{{ $active_class ? 'active' : '' }}">
+            <li>
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                     Logout</a>
@@ -93,7 +93,7 @@
                         <a href="{{ route('user.profile') }}">Profile
                         </a>
                     </li>
-                    <li class="{{ $active_class ? 'active' : '' }}">
+                    <li>
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                             Logout</a>
@@ -123,8 +123,12 @@
                 <div class="slide {{ @$key === 0 ? 'active' : ''}}">
                     <img src="{{ @$slider->image->url }}" alt=""/>
                     <div class="info">
+                        @if(@$slider->title)
                         <h2>{{ @$slider->title }}</h2>
-                        <p>{{ @$slider->text }}</p>
+                        @endif
+                        @if(@$slider->text)
+                        <p>{!! @$slider->text !!}</p>
+                        @endif
                         {{--                    <button>find out more</button>--}}
                     </div>
                 </div>

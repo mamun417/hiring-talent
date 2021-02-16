@@ -11,9 +11,9 @@ class MessageController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:admin');
-        $this->middleware('permission:message show', ['only' => ['index']]);
+        $this->middleware('permission:message show|message delete|message reply|message reply show|message reply delete', ['only' => ['index']]);
         $this->middleware('permission:message show')->only(['show']);
+        $this->middleware('permission:message delete')->only(['destroy']);
     }
 
     public function index(Request $request){
@@ -40,5 +40,11 @@ class MessageController extends Controller
     // message show admin panel
     public function show(Message $message){
         return view('admin.pages.messages.details', compact('message'));
+    }
+
+    public function destroy(Message $message)
+    {
+        $message->delete();
+        return redirect()->back()->with('success', 'Message successfully deleted');
     }
 }

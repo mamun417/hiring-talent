@@ -6,7 +6,7 @@
         <div class="ibox-content shadow">
             <a target="_blank" href="{{ url('/') }}">
                 <div style="text-align: center">
-                    <img alt="image" src="{{ $globalSettingInfo->image->url }}" width="166" />
+                    <img alt="image" src="{{ @$globalSettingInfo->image->url }}" width="166" />
                 </div>
             </a>
 
@@ -16,7 +16,7 @@
 
                 <div class="form-group">
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                           name="email" value="admin@test.com" required autocomplete="email" autofocus
+                           name="email"  required autocomplete="email" autofocus
                            placeholder="Email">
                     @error('email')
                     <span class="help-block m-b-none text-danger">{{ $message }}</span>
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input id="password" type="password" value="secret"
+                    <input id="password" type="password"
                            class="form-control @error('password') is-invalid @enderror" name="password" required
                            autocomplete="current-password" placeholder="Password">
                     @error('password')

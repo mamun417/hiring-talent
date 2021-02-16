@@ -28,21 +28,17 @@ class UserRequest extends FormRequest
 
         $rules = [
             'name' => "required|string|max:50",
-            'type' => "required|array",
-            'type.*' => "required",
-            'email'  => 'required|email|unique:admins,email,' . $user_id,
+            'email' => 'required|email|unique:users,email,' . $user_id,
         ];
 
-        if (request()->isMethod('put') || request()->isMethod('patch')) {
-            $rules['image']  = 'nullable|mimes:jpg,jpeg,bmp,png|max:8192';
-            $rules['password'] = "nullable|min:8";
+        if (request()->isMethod('post')) {
+            $rules['image'] = 'nullable|mimes:jpg,jpeg,bmp,png|max:8192';
         }
 
-        if (request()->isMethod('post')) {
-            $rules['image']  = 'nullable|mimes:jpg,jpeg,bmp,png|max:8192';
-            $rules['password'] = "required|min:8";
-            $rules['confirm_password'] = 'required|min:8|same:password';
+        if (request()->isMethod('put') || request()->isMethod('patch')) {
+            $rules['image'] = 'nullable|mimes:jpg,jpeg,bmp,png|max:8192';
         }
+
 
         return $rules;
     }

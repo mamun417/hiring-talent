@@ -51,7 +51,7 @@ class MissionAndValueController extends Controller
                 ]);
             }
             DB::commit();
-            return redirect()->route('admin.mission_and_values.index')->with('success', 'Mission And Value Create Successfully');
+            return redirect()->route('admin.mission_and_values.index')->with('success', 'Mission And Value Successfully Created');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -100,7 +100,7 @@ class MissionAndValueController extends Controller
                 }
             }
             DB::commit();
-            return redirect()->route('admin.mission_and_values.index')->with('success', 'Mission And Value Update Successfully');
+            return redirect()->route('admin.mission_and_values.index')->with('success', 'Mission And Value Successfully Updated');
 
         } catch (\Exception $exception) {
             report($exception);

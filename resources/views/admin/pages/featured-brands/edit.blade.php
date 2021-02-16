@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Featured Brand Update')
+@section('title', 'Featured Collaborative Brand Update')
 
 @section('content')
 
@@ -11,7 +11,7 @@
                     <a href="{{ route('admin.dashboard') }}">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{ route('admin.featured-brands.index') }}">Featured Brand</a>
+                    <a href="{{ route('admin.featured-brands.index') }}">Featured Collaborative Brand</a>
                 </li>
                 <li class="breadcrumb-item active">
                     <strong>Edit</strong>
@@ -28,7 +28,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Update Exist Featured Brand</h5>
+                            <h5>Update Exist Featured Collaborative Brand</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">

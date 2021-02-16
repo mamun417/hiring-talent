@@ -90,9 +90,10 @@
                                     <th class="text-left">User Name</th>
                                     <th class="text-left">User Email</th>
                                     <th class="text-left">Subject</th>
-                                    <th class="text-left">Message Body</th>
-                                    @canany(['message show'])
-                                        <th>Action</th>
+                                    <th class="text-left">Message</th>
+                                    <th>Replied Count</th>
+                                    @canany(['message show', 'message delete', 'message reply', 'message reply show', 'message reply delete'])
+                                        <th width="25%">Action</th>
                                     @endcanany
                                 </tr>
                                 </thead>
@@ -104,13 +105,49 @@
                                         <td class="text-left">{{ @$message->email }}</td>
                                         <td class="text-left">{{ ucfirst(Str::limit(@$message->subject, 50)) }}</td>
                                         <td class="text-left">{{ ucfirst(Str::limit(@$message->message, 50)) }}</td>
-                                        @canany(['message show'])
+                                        <td>
+                                            <span class="badge badge-primary">{{ @$message->replies()->count() }}</span>
+                                        </td>
+                                        @include("admin.pages.messages.reply-modal", ['id' => $message->id])
+                                        @canany(['message show', 'message delete', 'message reply', 'message reply show', 'message reply delete'])
                                             <td>
-                                                <a href="{{ route('admin.messages.show', @$message->id)  }}"
-                                                   title="Show"
-                                                   class="btn btn-info btn-sm cus_btn">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
+                                                @canany(['message reply'])
+                                                    <button type="button" class="btn btn-sm btn-primary"
+                                                            data-toggle="modal" data-target="#exampleModal-{{$message->id}}"
+                                                            data-whatever="@fat"
+                                                            title="Reply"
+                                                    >
+                                                        <i class="fa fa-reply"></i>
+                                                    </button>
+                                                @endcanany
+                                                @canany(['message reply show', 'message reply delete'])
+                                                    <a href="{{ route('admin.message.replies', @$message->id)  }}"
+                                                       title="Show Reply Details"
+                                                       class="btn btn-success btn-sm cus_btn">
+                                                        <i class="fa fa-comment"></i>
+                                                    </a>
+                                                @endcanany
+                                                @canany(['message show'])
+                                                    <a href="{{ route('admin.messages.show', @$message->id)  }}"
+                                                       title="Show Message Details"
+                                                       class="btn btn-warning btn-sm cus_btn">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                @endcanany
+                                                @canany(['message delete'])
+                                                    <button onclick="deleteRow({{ @$message->id }})"
+                                                            href="JavaScript:void(0)"
+                                                            title="Delete the message" class="btn btn-danger btn-sm cus_btn">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+
+                                                    <form id="row-delete-form{{ @$message->id }}" method="POST"
+                                                          class="d-none"
+                                                          action="{{ route('admin.messages.destroy', @$message->id) }}">
+                                                        @method('DELETE')
+                                                        @csrf()
+                                                    </form>
+                                                @endcanany
                                             </td>
                                         @endcanany
                                     </tr>

@@ -5,36 +5,32 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helpers\FileHandler;
 use App\Http\Requests\UserRequest;
-use App\Models\Admin;
-use Crypt;
-use DB;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth:admin');
-        $this->middleware('role:admin');
+        $this->middleware('permission:user edit|user delete', ['only' => ['index']]);
+        $this->middleware('permission:user edit')->only(['edit', 'update']);
+        $this->middleware('permission:user delete')->only(['destroy']);
     }
-
 
     public function index(Request $request)
     {
         $perPage = $request->perPage ?: 10;
         $keyword = $request->keyword;
         //get all Messages
-        $users = Admin::whereNotIn('id', [1])->latest();
+        $users = User::latest();
 
         if ($keyword) {
             $keyword = '%' . $keyword . '%';
             $users = $users->where('email', 'like', $keyword)
-                ->orWhere('name', 'like', $keyword)
-                ->whereNotIn('id', [1]);
+                ->orWhere('name', 'like', $keyword);
         }
 
         $users = $users->paginate($perPage);
@@ -45,76 +41,42 @@ class UserController extends Controller
 
     public function create()
     {
-        $roles = Role::latest()->get();
-        return view('admin.pages.users.create', compact('roles'));
+        abort(404);
     }
 
 
     public function store(UserRequest $request)
     {
-        DB::beginTransaction();
-
-        try {
-            $has_pass = Hash::make($request->password);
-
-            $user = Admin::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $has_pass,
-            ]);
-
-            if ($request->file('image')) {
-                $image_path = FileHandler::upload($request->image, 'user_images', ['width' => '84', 'height' => '84']);
-                $user->image()->create([
-                    'url' => Storage::url($image_path),
-                    'base_path' => $image_path,
-                ]);
-            }
-
-            $user->syncRoles($request->type);
-
-            DB::commit();
-            return back()->with('success', 'User Create Successfully');
-
-        } catch (\Exception $exception) {
-            report($exception);
-            DB::rollBack();
-            return redirect()->back()->with('error', $exception->getMessage());
-
-        }
+        abort(404);
     }
 
 
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        abort(404);
     }
 
-    public function edit(Admin $user)
+    public function edit(User $user)
     {
-        $roles = Role::latest()->get();
-        return view('admin.pages.users.edit', compact('user', 'roles'));
+        return view('admin.pages.users.edit', compact('user'));
     }
 
 
-    public function update(UserRequest $request, Admin $user)
+    public function update(UserRequest $request, User $user)
     {
+
         DB::beginTransaction();
         try {
-            if($request->password){
-                $update_password = Hash::make($request->password);
-            }
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $update_password ? $update_password : $user->password,
+                'phone' => $request->phone,
+                'address' => $request->address,
             ]);
-
-            $user->syncRoles($request->type);
 
             if ($request->file('image')) {
                 $image = $request->file('image');
-                $image_path = FileHandler::upload($image, 'user_images', ['width' => '84', 'height' => '84']);
+                $image_path = FileHandler::upload($image, 'user_images', ['width' => User::IMAGE_WIDTH, 'height' => User::IMAGE_HEIGHT]);
                 FileHandler::delete($user->image->base_path ?? null);
 
                 $image__data = [
@@ -132,7 +94,7 @@ class UserController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('success', 'User Update Successfully');
+            return redirect()->back()->with('success', 'User Successfully Updated');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -142,12 +104,20 @@ class UserController extends Controller
     }
 
 
-    public function destroy(Admin $user)
+    public function destroy(User $user)
     {
-
         FileHandler::delete($user->image ? $user->image->base_path : null);
+
+        if ($user->talent && $user->talent->images) {
+            foreach ($user->talent->images as $image) {
+                FileHandler::delete($image->base_path ? $image->base_path : null);
+            }
+        }
+
+        $user->talent()->delete();
+
         $user->delete();
 
-        return redirect()->back()->with('success', 'User Deleted Successfully');
+        return redirect()->back()->with('success', 'User Successfully Deleted');
     }
 }

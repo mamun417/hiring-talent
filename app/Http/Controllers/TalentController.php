@@ -7,9 +7,9 @@ use App\Http\Requests\TalentRequest;
 use App\Models\Talent;
 use App\Models\TalentDescription;
 use App\Models\User;
-use Auth;
-use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class TalentController extends Controller
@@ -148,7 +148,7 @@ class TalentController extends Controller
             }
 
             DB::commit();
-            return redirect()->back()->with('success', 'Talent Successfully Created');
+            return redirect()->back()->with('success', 'Talent Successfully Saved');
 
         } catch (\Exception $exception) {
             report($exception);

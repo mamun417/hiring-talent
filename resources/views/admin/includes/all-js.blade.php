@@ -32,6 +32,9 @@
             radioClass: 'iradio_square-green',
         });
 
+        toastr.options = {
+            "positionClass": "toast-top-center",
+        }
         @foreach(['success', 'warning', 'error', 'info'] as $item)
             @if(session($item))
             toastr['{{ $item }}']('{{ session($item) }}');

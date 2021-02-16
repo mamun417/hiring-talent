@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'User')
+@section('title', 'User Edit')
 
 @section('content')
     <div class="row wrapper border-bottom white-bg py-3">
@@ -8,8 +8,11 @@
                 <li class="breadcrumb-item">
                     <a href="{{ route('admin.dashboard') }}">Dashboard</a>
                 </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ route('admin.users.index') }}">Users</a>
+                </li>
                 <li class="breadcrumb-item active">
-                    <strong>user Edit</strong>
+                    <strong>Edit</strong>
                 </li>
             </ol>
 
@@ -23,7 +26,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Edit user for your company</h5>
+                            <h5>Edit user</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">

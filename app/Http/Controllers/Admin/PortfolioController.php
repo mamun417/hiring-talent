@@ -82,7 +82,7 @@ class PortfolioController extends Controller
 
 
             DB::commit();
-            return redirect()->route('admin.portfolios.index')->with('success', 'Portfolio Create Successfully');
+            return redirect()->route('admin.portfolios.index')->with('success', 'Welcome Successfully Created');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -147,7 +147,7 @@ class PortfolioController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('admin.portfolios.index')->with('success', 'Portfolio Update Successfully');
+            return redirect()->route('admin.portfolios.index')->with('success', 'Welcome Successfully Updated');
 
         } catch (\Exception $exception) {
             report($exception);
@@ -166,7 +166,7 @@ class PortfolioController extends Controller
         $portfolio->images()->delete();
 
         if ($portfolio->delete()) {
-            return redirect()->back()->with('success', 'Portfolio Deleted Successfully');
+            return redirect()->back()->with('success', 'Welcome Successfully Deleted');
         }
     }
 }

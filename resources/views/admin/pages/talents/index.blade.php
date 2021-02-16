@@ -93,9 +93,10 @@
                                     <th class="text-left">Gender</th>
                                     <th class="text-left">Date Of Birth</th>
                                     <th class="text-left">Subject</th>
-                                    <th class="text-left">Referee By</th>
-                                    @canany(['talent send message', 'talent show'])
-                                        <th>Action</th>
+                                    <th class="text-left">Referred By</th>
+                                    <th>Replied Count</th>
+                                    @canany(['talent show', 'talent delete', 'talent reply', 'talent reply show', 'talent reply delete'])
+                                        <th width="25%">Action</th>
                                     @endcanany
                                 </tr>
                                 </thead>
@@ -110,21 +111,47 @@
                                         <td class="text-left">{{ @$talent->date_of_birth }}</td>
                                         <td class="text-left">{{ @$talent->subject }}</td>
                                         <td class="text-left">{{ @$talent->refererBy->name ?? 'N/A' }}</td>
-                                        @canany(['talent send message', 'talent show'])
+                                        <td>
+                                            <span class="badge badge-primary">{{ @$talent->replies()->count() }}</span>
+                                        </td>
+                                        @canany(['talent show', 'talent delete', 'talent reply', 'talent reply show', 'talent reply delete'])
                                             <td>
-                                                @can('talent send message')
-                                                    <a onclick="sendTalentMessageModal(event, '{{ @$talent->email }}')"
-                                                       href="javascript:void(0)" title="Send Message"
-                                                       class="btn btn-info btn-sm cus_btn">
-                                                        Send Message
+                                                @can('talent reply')
+                                                    <a onclick="sendTalentMessageModal(event, '{{ @$talent->email.' '. @$talent->id }}')"
+                                                       href="javascript:void(0)" title="Reply"
+                                                       class="btn btn-sm btn-primary"
+                                                    >
+                                                        <i class="fa fa-reply-all"></i>
                                                     </a>
                                                 @endcan
+                                                @canany(['talent reply show', 'talent reply delete'])
+                                                    <a href="{{ route('admin.talent.message.replies', @$talent->id)  }}"
+                                                       title="Show Reply Details"
+                                                       class="btn btn-success btn-sm cus_btn">
+                                                        <i class="fa fa-comment"></i>
+                                                    </a>
+                                                @endcanany
                                                 @can('talent show')
                                                     <a href="{{ route('admin.talents.show', @$talent->id) }}"
-                                                       title="Show"
-                                                       class="btn btn-info btn-sm cus_btn">
+                                                       title="Show Talent Details"
+                                                       class="btn btn-warning btn-sm cus_btn">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
+                                                @endcan
+                                                @can('talent delete')
+                                                    <button onclick="deleteRow({{ @$talent->id }})"
+                                                            href="JavaScript:void(0)"
+                                                            title="Delete The Talent"
+                                                            class="btn btn-danger btn-sm cus_btn">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+
+                                                    <form id="row-delete-form{{ @$talent->id }}" method="POST"
+                                                          class="d-none"
+                                                          action="{{ route('admin.talents.destroy', @$talent->id) }}">
+                                                        @method('DELETE')
+                                                        @csrf()
+                                                    </form>
                                                 @endcan
                                             </td>
                                         @endcanany
@@ -160,6 +187,7 @@
                 </div>
                 <form action="{{ route('admin.send.message.to-talent') }}" method="post">
                     @csrf
+                    <input type="hidden" id="talentMessageId" name="talent_id">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="talentEmail">Email</label>
@@ -197,9 +225,13 @@
 
 @push('script')
     <script>
-        function sendTalentMessageModal(event, email) {
+        function sendTalentMessageModal(event, talentInfo) {
             event.preventDefault();
+            var talentInfo = talentInfo.split(' ');
+            var email = talentInfo[0];
+            var talent_id = talentInfo[1];
             $("#talentEmail").val(email)
+            $("#talentMessageId").val(talent_id)
             $("#talentSendMessageModal").modal('show')
         }
     </script>

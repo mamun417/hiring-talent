@@ -4,8 +4,8 @@
         <ul class="nav metismenu" id="side-menu">
             <li>
                 <a class="d-flex p-2" href="{{ route('home') }}" target="_blank">
-                    <h2 class="text-white mt-1 ml-4 full-width site_title_hover">
-                        <strong class="ml-4">
+                    <h2 class="text-white mt-1 full-width site_title_hover">
+                        <strong>
                             {{ config('app.name')  }}
                         </strong>
                     </h2>
@@ -57,7 +57,9 @@
                 </a>
             </li>
 
-            @php(@$active_class = getActiveClassByController('PermissionManageController') || getActiveClassByController('RoleManageController') || getActiveClassByController('UserController') )
+            @php(@$active_class = getActiveClassByController('PermissionManageController') ||
+                 getActiveClassByController('RoleManageController') ||
+                 getActiveClassByController('AdminController') )
             @role('admin')
 
 
@@ -67,22 +69,22 @@
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse sidebar_background_color">
-                    <li class="{{ getActiveClassByController('PermissionManageController') }}">
-                        <a href="{{ route('admin.permissions.index') }}">Manage Permission</a>
-                    </li>
+                    {{--                    <li class="{{ getActiveClassByController('PermissionManageController') }}">--}}
+                    {{--                        <a href="{{ route('admin.permissions.index') }}">Manage Permission</a>--}}
+                    {{--                    </li>--}}
 
                     <li class="{{ getActiveClassByController('RoleManageController') }}">
                         <a href="{{ route('admin.roles.index') }}">Manage Role</a>
                     </li>
 
-                    <li class="{{ getActiveClassByRoute('admin.users.create') }}">
-                        <a href="{{ route('admin.users.create') }}">
+                    <li class="{{ getActiveClassByRoute('admin.admins.create') }}">
+                        <a href="{{ route('admin.admins.create') }}">
                             <span class="nav-label">Admin Create</span>
                         </a>
                     </li>
 
-                    <li class="{{ getActiveClassByRoute('admin.users.index') . getActiveClassByRoute('admin.users.edit')}}">
-                        <a href="{{ route('admin.users.index') }}">
+                    <li class="{{ getActiveClassByRoute('admin.admins.index') . getActiveClassByRoute('admin.admins.edit')}}">
+                        <a href="{{ route('admin.admins.index') }}">
                             <span class="nav-label">Admin List</span>
                         </a>
                     </li>
@@ -90,11 +92,20 @@
             </li>
             @endrole
 
+            @canany(['user edit', 'user delete'])
+                <li class="{{ getActiveClassByController('UserController') }}">
+                    <a href="{{ route('admin.users.index') }}">
+                        <i class="fa fa-user"></i>
+                        <span class="nav-label">Users</span>
+                    </a>
+                </li>
+            @endcanany
+
             @canany(['background_image create', 'background_image edit', 'background_image delete'])
-                <li class="{{ getActiveClassByRoute('admin.slider-bg*') }}">
+                <li class="{{ getActiveClassByController('SliderBgController') }}">
                     <a href="{{ route('admin.slider-bg.index') }}">
                         <i class="fa fa-photo"></i>
-                        <span class="nav-label">Background Image</span>
+                        <span class="nav-label">Background Images</span>
                     </a>
                 </li>
             @endcanany
@@ -123,11 +134,15 @@
                 </li>
             @endcanany
 
-            @canany(['featured_brand create', 'featured_brand edit', 'featured_brand delete'])
+            @canany(['featured_collaborative_brand create', 'featured_collaborative_brand edit', 'featured_collaborative_brand delete'])
                 <li class="{{ getActiveClassByController('FeaturedBrandsController') }}">
-                    <a href="{{ route('admin.featured-brands.index') }}">
-                        <i class="fa fa-braille"></i>
-                        <span class="nav-label">FEATURED BRANDERS</span>
+                    <a href="{{ route('admin.featured-brands.index') }}" class="d-flex">
+                        <div>
+                            <i class="fa fa-braille"></i>
+                        </div>
+                        <div>
+                            <span class="nav-label">Featured Collaborative Branders</span>
+                        </div>
                     </a>
                 </li>
             @endcanany
@@ -141,14 +156,14 @@
             @endcanany
 
             @php(@$active_class = getActiveClassByController('TalentDescriptionController') || getActiveClassByController('TalentController'))
-            @canany(['talent show', 'talent send message', 'talent_description create', 'talent_description edit'])
+            @canany(['talent show', 'talent delete', 'talent reply', 'talent reply show', 'talent reply delete', 'talent_description create', 'talent_description edit'])
                 <li class="{{ @$active_class ? 'active' : '' }}">
                     <a href="javascript:void(0)"><i class="fa fa-users"></i>
                         <span class="nav-label">Manage Talents</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level collapse sidebar_background_color">
-                        @canany(['talent show', 'talent send message'])
+                        @canany(['talent show', 'talent delete', 'talent reply', 'talent reply show', 'talent reply delete'])
                             <li class="{{ getActiveClassByController('TalentController') }}">
                                 <a href="{{ route('admin.talents.index') }}">Talents</a>
                             </li>
@@ -162,8 +177,8 @@
                 </li>
             @endcanany
 
-            @canany(['message show'])
-                <li class="{{ getActiveClassByController('MessageController') }}">
+            @canany(['message show', 'message delete', 'message reply', 'message reply show', 'message reply delete'])
+                <li class="{{ getActiveClassByController('MessageController') }} {{ getActiveClassByController('ReplyController') }}">
                     <a href="{{ route('admin.messages.index') }}">
                         <i class="fa fa-envelope-o"></i>
                         <span class="nav-label">Messages</span>

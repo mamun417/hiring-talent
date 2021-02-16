@@ -41,10 +41,15 @@ class Talent extends Model
 
     use HasFactory;
 
+
     const PERMISSION = [
-        0 => 'show',
-        1 => 'send message',
+        'show',
+        'delete',
+        'reply',
+        'reply delete',
+        'reply show',
     ];
+
 
     public function images()
     {
@@ -61,5 +66,9 @@ class Talent extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function replies()
+    {
+        return $this->hasMany(TalentReply::Class);
+    }
 
 }

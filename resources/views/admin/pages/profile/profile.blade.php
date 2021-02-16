@@ -20,7 +20,7 @@
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row m-t-lg">
             <div class="col-md-4 mb-lg-0 jumbotron">
-                <div class="profile-image">.
+                <div class="profile-image">
                     <img src="{{ @$admin->image()->first()->url }}" class="rounded-circle circle-border m-b-md" alt="profile">
                 </div>
 
@@ -40,20 +40,24 @@
             </div>
             <div class="col-md-8">
                 <div class="tabs-container">
+
+                    @php($active_change_password = old('current_password') ? true : false)
+
                     <ul class="nav nav-tabs" role="tablist">
                         <li>
-                            <a class="nav-link active show text-dark" data-toggle="tab" href="#profile-tab">
+                            <a class="nav-link text-dark {{ !$active_change_password ? 'active show' : '' }}" data-toggle="tab" href="#profile-tab">
                                 <h3>Change Info</h3>
                             </a>
                         </li>
                         <li>
-                            <a class="nav-link text-dark" data-toggle="tab" href="#password-tab">
+                            <a class="nav-link text-dark {{ $active_change_password ? 'active show' : '' }}" data-toggle="tab" href="#password-tab">
                                 <h3>Change Password</h3>
                             </a>
                         </li>
                     </ul>
+
                     <div class="tab-content">
-                        <div role="tabpanel" id="profile-tab" class="tab-pane active show">
+                        <div role="tabpanel" id="profile-tab" class="tab-pane {{ !$active_change_password ? 'active show' : '' }}">
                             <form action="{{ route('admin.profile.update', Auth::id()) }}" method="post" enctype="multipart/form-data">
                                 @method('patch')
                                 @csrf
@@ -100,16 +104,16 @@
                         </div>
 
 
-                        <div role="tabpanel" id="password-tab" class="tab-pane">
+                        <div role="tabpanel" id="password-tab" class="tab-pane {{ $active_change_password ? 'active show' : '' }}">
                             <form action="{{ route('admin.password.change') }}" method="post">
                                 @method('patch')
                                 @csrf
                                 <div class="panel-body">
                                     <div class="form-group">
-                                        <label for="old_password">Old Password</label>
-                                        <input type="password" id="old_password" name="old_password" class="form-control">
+                                        <label for="current_password">Current Password</label>
+                                        <input type="password" id="current_password" required name="current_password" class="form-control">
 
-                                        @error('old_password')
+                                        @error('current_password')
                                         <span class="help-block m-b-none text-danger">
                                             {{ $message }}
                                         </span>
@@ -117,10 +121,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="new_password">New Password</label>
-                                        <input type="password" id="new_password" name="new_password" class="form-control">
+                                        <label for="password">New Password</label>
+                                        <input type="password" id="password" name="password" class="form-control" required>
 
-                                        @error('new_password')
+                                        @error('password')
                                         <span class="help-block m-b-none text-danger">
                                             {{ $message }}
                                         </span>
@@ -128,10 +132,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="confirm_password">Confirm Password</label>
-                                        <input type="password" id="confirm_password" name="confirm_password" class="form-control">
+                                        <label for="password_confirmation">Confirm Password</label>
+                                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
 
-                                        @error('confirm_password')
+                                        @error('password_confirmation')
                                         <span class="help-block m-b-none text-danger">
                                             {{ $message }}
                                         </span>

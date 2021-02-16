@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Portfolio Create')
+@section('title', 'Welcome Create')
 
 @section('content')
 
@@ -11,7 +11,7 @@
                     <a href="{{ route('admin.dashboard') }}">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{ route('admin.portfolios.index') }}">Portfolios</a>
+                    <a href="{{ route('admin.portfolios.index') }}">Welcome</a>
                 </li>
                 <li class="breadcrumb-item active">
                     <strong>Create</strong>
@@ -27,7 +27,7 @@
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Create a new portfolio</h5>
+                            <h5>Create  Welcome</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">

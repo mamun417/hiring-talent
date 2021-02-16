@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Featured Brands')
+@section('title', 'Featured Collaborative Brands')
 
 @section('content')
 
@@ -11,7 +11,7 @@
                     <a href="{{ route('admin.dashboard') }}">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{ route('admin.featured-brands.index') }}">Featured Brands</a>
+                    <a href="{{ route('admin.featured-brands.index') }}">Featured Collaborative Brands</a>
                 </li>
                 <li class="breadcrumb-item active">
                     <strong>Index</strong>
@@ -25,8 +25,8 @@
             <div class="col-lg-12">
                 <div class="ibox ">
                     <div class="ibox-title">
-                        <h5>All Featured Brands</h5>
-                        @can('featured_brand create')
+                        <h5>All Featured Collaborative Brands</h5>
+                        @can('featured_collaborative_brand create')
                             <a href="{{ route('admin.featured-brands.create') }}"
                                class="btn btn-sm btn-primary pull-right">
                                 <i class="fa fa-plus"></i> <strong>Create</strong>
@@ -99,7 +99,7 @@
                                     <th class="text-left">Image</th>
                                     <th class="text-left">Name</th>
                                     <th class="text-left">Title</th>
-                                    @canany(['featured_brand edit', 'featured_brand delete'])
+                                    @canany(['featured_collaborative_brand edit', 'featured_collaborative_brand delete'])
                                         <th class="text-center">Actions</th>
                                     @endcanany
                                 </tr>
@@ -114,16 +114,16 @@
                                         </td>
                                         <td class="text-left">{{ ucfirst(Str::limit(@$featured_brand->name, 50)) }}</td>
                                         <td class="text-left">{{ ucfirst(Str::limit(@$featured_brand->title, 50)) }}</td>
-                                        @canany(['featured_brand edit', 'featured_brand delete'])
+                                        @canany(['featured_collaborative_brand edit', 'featured_collaborative_brand delete'])
                                             <td>
-                                                @can('featured_brand edit')
+                                                @can('featured_collaborative_brand edit')
                                                     <a href="{{ route('admin.featured-brands.edit', @$featured_brand->id)  }}"
                                                        title="Edit"
                                                        class="btn btn-info btn-sm cus_btn">
                                                         <i class="fa fa-pencil-square-o"></i>
                                                     </a>
                                                 @endcan
-                                                @can('featured_brand delete')
+                                                @can('featured_collaborative_brand delete')
                                                     <button onclick="deleteRow({{ @$featured_brand->id }})"
                                                             href="JavaScript:void(0)"
                                                             title="Delete" class="btn btn-danger btn-sm cus_btn">
@@ -147,7 +147,7 @@
                             @if (count(@$featured_brands))
                                 {{ @$featured_brands->appends(['keyword' => request('keyword'), 'perPage' => request('perPage')])->links() }}
                             @else
-                                <div class="text-center">No featured brands found</div>
+                                <div class="text-center">No featured collaborative brands found</div>
                             @endif
                         </div>
                     </div>
