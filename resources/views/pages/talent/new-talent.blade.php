@@ -595,7 +595,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         $(".date_of_birth").flatpickr({
-            dateFormat: "d/m/Y",
+            dateFormat: "m-d-Y",
             maxDate: "today",
         });
     </script>
