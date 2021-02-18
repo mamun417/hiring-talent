@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MessageRequest;
+use App\Mail\MessageMail;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 
 class MessageController extends Controller
 {
@@ -32,17 +33,13 @@ class MessageController extends Controller
 
     public function store(MessageRequest $request)
     {
-
             $email_details= $request->only(['name', 'email', 'subject', 'message']);
 
-            Mail::to($email_details['email'])->send(new \App\Mail\MessageMail($email_details));
+            Mail::to(config('mail.from.address'))->send(new MessageMail($email_details));
             Message::create($email_details);
 
             DB::commit();
             return redirect()->back()->with('success', 'Message Successfully Send');
-
-
-
     }
 
     /**

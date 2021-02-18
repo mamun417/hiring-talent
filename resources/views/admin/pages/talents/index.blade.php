@@ -78,15 +78,27 @@
 
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
 
                         <div class="table-responsive m-t-md">
+                            @canany(['talent reply'])
+                                <div class="d-flex mb-2">
+                                    <button class="btn btn-sm btn-success mr-2 sendMailSelectedTalentBtn">Send mail to
+                                        selected talents
+                                    </button>
+                                    <button class="btn btn-sm btn-info sendAllTalent">Send mail to all talents</button>
+                                </div>
+                            @endcanany
                             <table class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
+                                    @canany(['talent reply'])
+                                        <th class="text-left" width="75">
+                                            <input type="checkbox" id="checkAll"> <label for="checkAll">All</label>
+                                        </th>
+                                    @endcanany
                                     <th class="text-left">Talent Name</th>
                                     <th class="text-left">Email</th>
                                     <th class="text-left">Phone</th>
@@ -96,7 +108,7 @@
                                     <th class="text-left">Referred By</th>
                                     <th>Replied Count</th>
                                     @canany(['talent show', 'talent delete', 'talent reply', 'talent reply show', 'talent reply delete'])
-                                        <th width="25%">Action</th>
+                                        <th width="20%">Action</th>
                                     @endcanany
                                 </tr>
                                 </thead>
@@ -104,6 +116,11 @@
                                 <tbody>
                                 @foreach(@$talents as $talent)
                                     <tr>
+                                        @canany(['talent reply'])
+                                            <td class="text-left">
+                                                <input type="checkbox" value="{{ $talent->id }}" class="checkedMe">
+                                            </td>
+                                        @endcanany
                                         <td class="text-left">{{ ucfirst(Str::limit(@$talent->talent_name, 50)) }}</td>
                                         <td class="text-left">{{ @$talent->email }}</td>
                                         <td class="text-left">{{ @$talent->phone }}</td>
@@ -112,14 +129,15 @@
                                         <td class="text-left">{{ @$talent->subject }}</td>
                                         <td class="text-left">{{ @$talent->refererBy->name ?? 'N/A' }}</td>
                                         <td>
-                                            <span class="badge badge-primary">{{ @$talent->replies()->count() }}</span>
+                                                <span
+                                                    class="badge badge-primary">{{ @$talent->replies()->count() }}</span>
                                         </td>
                                         @canany(['talent show', 'talent delete', 'talent reply', 'talent reply show', 'talent reply delete'])
                                             <td>
                                                 @can('talent reply')
                                                     <a onclick="sendTalentMessageModal(event, '{{ @$talent->email.' '. @$talent->id }}')"
                                                        href="javascript:void(0)" title="Reply"
-                                                       class="btn btn-sm btn-primary"
+                                                       class="btn btn-sm btn-primary mb-1 mb-lg-0"
                                                     >
                                                         <i class="fa fa-reply-all"></i>
                                                     </a>
@@ -127,14 +145,14 @@
                                                 @canany(['talent reply show', 'talent reply delete'])
                                                     <a href="{{ route('admin.talent.message.replies', @$talent->id)  }}"
                                                        title="Show Reply Details"
-                                                       class="btn btn-success btn-sm cus_btn">
+                                                       class="btn btn-success btn-sm cus_btn  mb-1 mb-lg-0">
                                                         <i class="fa fa-comment"></i>
                                                     </a>
                                                 @endcanany
                                                 @can('talent show')
                                                     <a href="{{ route('admin.talents.show', @$talent->id) }}"
                                                        title="Show Talent Details"
-                                                       class="btn btn-warning btn-sm cus_btn">
+                                                       class="btn btn-warning btn-sm cus_btn  mb-1 mb-lg-0">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                 @endcan
@@ -142,7 +160,7 @@
                                                     <button onclick="deleteRow({{ @$talent->id }})"
                                                             href="JavaScript:void(0)"
                                                             title="Delete The Talent"
-                                                            class="btn btn-danger btn-sm cus_btn">
+                                                            class="btn btn-danger btn-sm cus_btn  mb-1 mb-lg-0">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
 
@@ -159,7 +177,6 @@
                                 @endforeach
                                 </tbody>
                             </table>
-
                             @if (count(@$talents))
                                 {{ @$talents->appends(['keyword' => request('keyword'), 'perPage' => request('perPage')])->links() }}
 
@@ -174,53 +191,7 @@
     </div>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="talentSendMessageModal" tabindex="-1" role="dialog"
-         aria-labelledby="talentSendMessageModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="talentSendMessageModal">Message Send</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="{{ route('admin.send.message.to-talent') }}" method="post">
-                    @csrf
-                    <input type="hidden" id="talentMessageId" name="talent_id">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="talentEmail">Email</label>
-                            <input type="email" class="form-control" name="talent_email" id="talentEmail">
-                            @error('talent_email')
-                            <small>{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input class="form-control" id="subject" type="text" name="subject">
-                            @error('subject')
-                            <small>{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="message_body">Message</label>
-                            <textarea class="form-control" name="message_body" id="message_body" cols="30"
-                                      rows="10"></textarea>
-                            @error('message_body')
-                            <small>{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Send</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
+    @include('admin.pages.talents.talentMailModal')
 @endsection
 
 @push('script')
@@ -234,5 +205,54 @@
             $("#talentMessageId").val(talent_id)
             $("#talentSendMessageModal").modal('show')
         }
+
+
+        $("#checkAll").change(function () {
+            $("input:checkbox").prop('checked', this.checked);
+        });
+
+        $(".checkedMe").click(function () {
+            if ($(this).is(":checked")) {
+                var isAllChecked = true; // initialize all is checked true
+
+                $(".checkedMe").each(function () {
+                    if (!this.checked)
+                        isAllChecked = false;
+                });
+
+                if (isAllChecked) {
+                    $("#checkAll").prop("checked", true);
+                }
+            } else {
+                $("#checkAll").prop("checked", false);
+            }
+        });
+
+
+        $(".sendAllTalent").on('click', (e) => {
+            e.preventDefault();
+            $("#sendMailAllTalentModal").modal('show');
+        })
+
+        $(".sendMailSelectedTalentBtn").on('click', (e) => {
+            e.preventDefault();
+
+            let talents = [];
+            $(".checkedMe").each(function () {
+                if (this.checked) {
+                    talents.push($(this).val())
+                }
+
+            });
+
+            if (talents.length) {
+                $("#selectedTalentField").val(talents)
+                $("#sendMailAllSelectedTalentModal").modal('show');
+            } else {
+                toastr.warning('First select some talents.');
+            }
+        })
+
+
     </script>
 @endpush

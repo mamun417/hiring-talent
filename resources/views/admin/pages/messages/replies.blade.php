@@ -55,7 +55,7 @@
                                     <th class="text-left">Replied By</th>
                                     <th class="text-left">Subject</th>
                                     <th class="text-left">Replied Message</th>
-                                    <th class="text-left">Time</th>
+                                    <th class="text-left">Date</th>
                                     @canany(['message reply delete'])
                                         <th width="10%">Action</th>
                                     @endcanany
@@ -68,7 +68,7 @@
                                         <td class="text-left">{{ ucfirst(Str::limit(@$reply->createdUser->name, 50)) }}</td>
                                         <td class="text-left">{{ ucfirst(@$reply->reply_subject) }}</td>
                                         <td class="text-left">{{ @$reply->reply_message}}</td>
-                                        <td class="text-left">{{ @$reply->created_at->diffForHumans() }}</td>
+                                        <td class="text-left">{{ @$reply->created_at->format('d-m-Y H:i:s') }}</td>
                                         @canany(['message reply delete'])
                                             <td>
                                                 @can('message reply delete')
